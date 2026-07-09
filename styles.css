@@ -1,0 +1,278 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #F4F2EE;
+  font-family: 'Archivo', Helvetica, sans-serif;
+  color: #23211E;
+}
+
+a { color: #23211E; }
+a:hover { color: #6B675F; }
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 36px 24px 48px;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8A857B;
+  font-weight: 600;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.subhead {
+  font-size: 13px;
+  color: #8A857B;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 1000px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-family: Archivo, Helvetica, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: #FFFFFF;
+  color: #23211E;
+  border: 1px solid #E4E0D8;
+}
+
+.chip.active {
+  background: #23211E;
+  color: #FFFFFF;
+  border: 1px solid #23211E;
+}
+
+.chip-swatches {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.chip-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.view-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.view-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: Archivo, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: #FFFFFF;
+  color: #23211E;
+  border: 1px solid #E4E0D8;
+}
+
+.view-btn.active {
+  background: #23211E;
+  color: #FFFFFF;
+  border: 1px solid #23211E;
+}
+
+.main-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 1190px;
+}
+
+.stage-wrap {
+  flex: 1 1 520px;
+  max-width: 960px;
+  min-width: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.orbit-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  text-align: center;
+  font-size: 12px;
+  color: #8A857B;
+  pointer-events: none;
+}
+
+.mixer {
+  flex: 0 0 200px;
+  align-self: flex-start;
+  background: #FFFFFF;
+  border: 1px solid #E4E0D8;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mixer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mixer-title {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8A857B;
+  font-weight: 700;
+}
+
+.reset-btn {
+  font-family: Archivo, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #23211E;
+  background: #F4F2EE;
+  border: 1px solid #E4E0D8;
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.mixer-note {
+  font-size: 11.5px;
+  color: #8A857B;
+  line-height: 1.5;
+  margin-top: -6px;
+}
+
+.mixer-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mixer-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8A857B;
+  font-weight: 600;
+}
+
+.mixer-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mixer-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0;
+  border: 2px solid rgba(0,0,0,0.12);
+}
+
+.mixer-swatch.selected {
+  border: 2px solid #23211E;
+}
+
+.surface-grid {
+  width: 960px;
+  max-width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #E4E0D8;
+  border-radius: 10px;
+  padding: 18px 22px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.surface-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.surface-item-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.surface-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.surface-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8A857B;
+  font-weight: 600;
+}
+
+.surface-desc {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.footnote {
+  font-size: 12px;
+  color: #8A857B;
+  max-width: 720px;
+  text-align: center;
+  line-height: 1.6;
+}
