@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #F4F2EE; font-family: 'Archivo', Helvetica, sans-serif; color: #23211E; }
+  a { color: #23211E; } a:hover { color: #6B675F; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 36px 24px 48px; box-sizing: border-box">
+
+  <div style="display: flex; flex-direction: column; gap: 6px; align-items: center; text-align: center">
+    <div style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A857B; font-weight: 600">2BHK · whole-flat laminate visualizer · from your furniture design PDF</div>
+    <h1 style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.02em">{{ roomName }} — {{ sel.name }}</h1>
+    <div style="font-size: 13px; color: #8A857B">Pick a room, then a palette — or mix colors per surface. <a href="/room-visualizer">Bedroom 3D visualizer →</a></div>
+  </div>
+
+  <!-- room tabs -->
+  <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center">
+    <sc-for list="{{ roomBtns }}" as="r" hint-placeholder-count="5">
+      <button onClick="{{ r.pick }}" style="{{ r.style }}">{{ r.name }}</button>
+    </sc-for>
+  </div>
+
+  <!-- view switcher -->
+  <div style="display: flex; gap: 8px; justify-content: center">
+    <sc-for list="{{ viewBtns }}" as="v" hint-placeholder-count="3">
+      <button onClick="{{ v.pick }}" style="{{ v.style }}">{{ v.name }}</button>
+    </sc-for>
+  </div>
+
+  <!-- palette chips for current room -->
+  <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 1000px">
+    <sc-for list="{{ chips }}" as="c" hint-placeholder-count="4">
+      <button onClick="{{ c.pick }}" style="{{ c.style }}">
+        <span style="display: inline-flex; gap: 3px">
+          <span style="width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid rgba(0,0,0,0.08); background: {{ c.d1 }}"></span>
+          <span style="width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid rgba(0,0,0,0.08); background: {{ c.d2 }}"></span>
+          <span style="width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid rgba(0,0,0,0.08); background: {{ c.d3 }}"></span>
+        </span>
+        <span>{{ c.name }}</span>
+      </button>
+    </sc-for>
+  </div>
+
+  <!-- illustration + mixer -->
+  <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 1190px">
+  <div ref="{{ stageWrapRef }}" style="flex: 1 1 520px; max-width: 960px; min-width: 300px; position: relative; height: {{ stageWrapH }}px; overflow: hidden">
+
+  <!-- ============ LIVING ROOM ============ -->
+  <sc-if value="{{ isLiving }}" hint-placeholder-val="{{ true }}">
+  <div data-screen-label="Living Room" style="position: relative; width: 960px; height: 560px; border-radius: 12px; overflow: hidden; border: 1px solid #E4E0D8; background: #F7F5F1; transform: scale({{ stageScale }}); transform-origin: top left">
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 54px; background: linear-gradient(#EFEDE8, #E5E2DB)"></div>
+    <!-- ceiling cove + fan -->
+    <div style="position: absolute; top: 0; left: 240px; width: 480px; height: 34px; background: #FFFFFF; box-shadow: 0 10px 24px rgba(255,244,220,0.55)"></div>
+    <div style="position: absolute; top: 30px; left: 448px; width: 64px; height: 5px; border-radius: 3px; background: #8A6844"></div>
+    <!-- left fluted glass display -->
+    <div style="position: absolute; left: 24px; top: 40px; width: 74px; height: 466px; border: 3px solid #3A3530; box-sizing: border-box; background: repeating-linear-gradient(90deg, #F2F2EE 0px, #F2F2EE 5px, #E2E2DC 5px, #E2E2DC 7px)"></div>
+    <div style="position: absolute; left: 30px; top: 130px; width: 62px; height: 3px; background: rgba(0,0,0,0.10)"></div>
+    <div style="position: absolute; left: 30px; top: 230px; width: 62px; height: 3px; background: rgba(0,0,0,0.10)"></div>
+    <div style="position: absolute; left: 30px; top: 330px; width: 62px; height: 3px; background: rgba(0,0,0,0.10)"></div>
+    <!-- TV marble panel -->
+    <div style="position: absolute; left: 118px; top: 40px; width: 330px; height: 380px; background: linear-gradient(115deg, {{ sel.tvPanel }} 60%, color-mix(in oklab, {{ sel.tvPanel }}, #C9A876 18%) 62%, {{ sel.tvPanel }} 66%, color-mix(in oklab, {{ sel.tvPanel }}, #C9A876 14%) 82%, {{ sel.tvPanel }} 85%); transition: background 0.4s"></div>
+    <div style="position: absolute; left: 230px; top: 40px; width: 8px; height: 380px; background: #3E4247"></div>
+    <div style="position: absolute; left: 366px; top: 40px; width: 8px; height: 380px; background: #3E4247"></div>
+    <!-- TV -->
+    <div style="position: absolute; left: 200px; top: 130px; width: 170px; height: 104px; background: linear-gradient(160deg, #16414F, #0E2A34); border: 3px solid #101418; border-radius: 3px"></div>
+    <!-- wood slat ledge + base units -->
+    <div style="position: absolute; left: 118px; top: 420px; width: 330px; height: 30px; background: repeating-linear-gradient(90deg, {{ sel.wood }} 0px, {{ sel.wood }} 6px, color-mix(in oklab, {{ sel.wood }}, black 16%) 6px, color-mix(in oklab, {{ sel.wood }}, black 16%) 8px); transition: background 0.4s; box-shadow: 0 -6px 12px rgba(255,246,222,0.6)"></div>
+    <div style="position: absolute; left: 118px; top: 450px; width: 330px; height: 56px; background: {{ sel.baseUnit }}; transition: background 0.4s; box-shadow: inset 0 1px 0 rgba(0,0,0,0.06)"></div>
+    <div style="position: absolute; left: 228px; top: 450px; width: 1px; height: 56px; background: rgba(0,0,0,0.10)"></div>
+    <div style="position: absolute; left: 338px; top: 450px; width: 1px; height: 56px; background: rgba(0,0,0,0.10)"></div>
+    <!-- sofa back wall -->
+    <div style="position: absolute; left: 486px; top: 40px; width: 450px; height: 466px; background: {{ sel.sofaWall }}; transition: background 0.4s"></div>
+    <div style="position: absolute; left: 530px; top: 80px; width: 96px; height: 260px; border: 2px solid rgba(0,0,0,0.10); border-radius: 48px"></div>
+    <div style="position: absolute; left: 700px; top: 80px; width: 96px; height: 200px; border: 2px solid rgba(0,0,0,0.10); border-radius: 48px"></div>
+    <div style="position: absolute; left: 556px; top: 150px; width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(140deg, #E9D8C4, #CBB49B)"></div>
+    <div style="position: absolute; left: 726px; top: 128px; width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(140deg, #E9D8C4, #CBB49B)"></div>
+    <div style="position: absolute; left: 856px; top: 170px; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(140deg, #E9D8C4, #CBB49B)"></div>
+    <!-- sofa -->
+    <div style="position: absolute; left: 520px; top: 330px; width: 400px; height: 88px; border-radius: 10px 10px 0 0; background: {{ sel.fabric }}; transition: background 0.4s"></div>
+    <div style="position: absolute; left: 544px; top: 356px; width: 56px; height: 44px; border-radius: 8px; background: #E9B86B"></div>
+    <div style="position: absolute; left: 606px; top: 360px; width: 52px; height: 40px; border-radius: 8px; background: #F5F1E8"></div>
+    <div style="position: absolute; left: 664px; top: 356px; width: 56px; height: 44px; border-radius: 8px; background: #35506B"></div>
+    <div style="position: absolute; left: 820px; top: 356px; width: 56px; height: 44px; border-radius: 8px; background: #F5F1E8"></div>
+    <div style="position: absolute; left: 500px; top: 414px; width: 440px; height: 46px; border-radius: 6px; background: color-mix(in oklab, {{ sel.fabric }}, black 10%); transition: background 0.4s"></div>
+    <div style="position: absolute; left: 496px; top: 460px; width: 448px; height: 22px; background: repeating-linear-gradient(90deg, {{ sel.wood }} 0px, {{ sel.wood }} 8px, color-mix(in oklab, {{ sel.wood }}, black 12%) 8px, color-mix(in oklab, {{ sel.wood }}, black 12%) 10px); transition: background 0.4s"></div>
+    <!-- coffee table -->
+    <div style="position: absolute; left: 340px; top: 468px; width: 120px; height: 12px; border-radius: 6px; background: color-mix(in oklab, {{ sel.wood }}, black 6%)"></div>
+    <div style="position: absolute; left: 386px; top: 480px; width: 28px; height: 26px; border-radius: 0 0 12px 12px; background: color-mix(in oklab, {{ sel.wood }}, black 14%)"></div>
+  </div>
+  </sc-if>
+
+  <!-- ============ KITCHEN ============ -->
+  <sc-if value="{{ isKitchen }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Kitchen" style="position: relative; width: 960px; height: 560px; border-radius: 12px; overflow: hidden; border: 1px solid #E4E0D8; background: #F6F5F1; transform: scale({{ stageScale }}); transform-origin: top left">
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 44px; background: linear-gradient(#EFEDE8, #E5E2DB)"></div>
+    <!-- tall gloss loft row -->
+    <div style="position: absolute; left: 40px; top: 24px; width: 880px; height: 96px; background: linear-gradient(170deg, color-mix(in oklab, {{ sel.tallCab }}, white 12%), {{ sel.tallCab }}); transition: background 0.4s"></div>
+    <div style="position: absolute; left: 260px; top: 24px; width: 1px; height: 96px; background: rgba(0,0,0,0.12)"></div>
+    <div style="position: absolute; left: 480px; top: 24px; width: 1px; height: 96px; background: rgba(0,0,0,0.12)"></div>
+    <div style="position: absolute; left: 700px; top: 24px; width: 1px; height: 96px; background: rgba(0,0,0,0.12)"></div>
+    <!-- upper cabinets: white + fluted glass -->
+    <div style="position: absolute; left: 40px; top: 120px; width: 620px; height: 130px; background: {{ sel.upperCab }}; transition: background 0.4s"></div>
+    <div style="position: absolute; left: 120px; top: 132px; width: 90px; height: 106px; border: 3px solid #3A3530; box-sizing: border-box; background: repeating-linear-gradient(90deg, #F5F5F1 0px, #F5F5F1 4px, #E3E3DD 4px, #E3E3DD 6px)"></div>
+    <div style="position: absolute; left: 300px; top: 132px; width: 90px; height: 106px; border: 3px solid #3A3530; box-sizing: border-box; background: repeating-linear-gradient(90deg, #F5F5F1 0px, #F5F5F1 4px, #E3E3DD 4px, #E3E3DD 6px)"></div>
+    <div style="position: absolute; left: 490px; top: 132px; width: 90px; height: 106px; border: 3px solid #3A3530; box-sizing: border-box; background: repeating-linear-gradient(90deg, #F5F5F1 0px, #F5F5F1 4px, #E3E3DD 4px, #E3E3DD 6px)"></div>
+    <!-- wood open shelf band -->
+    <div style="position: absolute; left: 40px; top: 250px; width: 620px; height: 34px; background: repeating-linear-gradient(90deg, #C9A876 0px, #C9A876 7px, #B08F5D 7px, #B08F5D 9px); box-shadow: inset 0 -4px 10px rgba(255,244,214,0.8)"></div>
+    <!-- chimney + window -->
+    <div style="position: absolute; left: 680px; top: 120px; width: 130px; height: 164px; background: linear-gradient(160deg, #2A2E33, #101418); border-radius: 3px"></div>
+    <div style="position: absolute; left: 830px; top: 120px; width: 90px; height: 164px; background: #9FB4C4; border: 4px solid #6B7178; box-sizing: border-box"></div>
+    <!-- backsplash tile -->
+    <div style="position: absolute; left: 40px; top: 284px; width: 880px; height: 108px; background-color: {{ sel.splash }}; background-image: repeating-linear-gradient(45deg, rgba(90,110,125,0.30) 0px, rgba(90,110,125,0.30) 3px, transparent 3px, transparent 22px), repeating-linear-gradient(-45deg, rgba(90,110,125,0.30) 0px, rgba(90,110,125,0.30) 3px, transparent 3px, transparent 22px); transition: background-color 0.4s"></div>
+    <!-- counter -->
+    <div style="position: absolute; left: 40px; top: 392px; width: 880px; height: 18px; background: {{ sel.counter }}; transition: background 0.4s; box-shadow: 0 3px 6px rgba(0,0,0,0.14)"></div>
+    <!-- hob + pot -->
+    <div style="position: absolute; left: 690px; top: 380px; width: 110px; height: 10px; border-radius: 3px; background: #101418"></div>
+    <div style="position: absolute; left: 500px; top: 366px; width: 56px; height: 26px; border-radius: 5px 5px 2px 2px; background: #A5766B"></div>
+    <!-- base cabinets -->
+    <div style="position: absolute; left: 40px; top: 410px; width: 880px; height: 106px; background: linear-gradient(170deg, color-mix(in oklab, {{ sel.baseCab }}, white 10%), {{ sel.baseCab }}); transition: background 0.4s"></div>
+    <div style="position: absolute; left: 200px; top: 410px; width: 1px; height: 106px; background: rgba(0,0,0,0.14)"></div>
+    <div style="position: absolute; left: 360px; top: 410px; width: 1px; height: 106px; background: rgba(0,0,0,0.14)"></div>
+    <div style="position: absolute; left: 520px; top: 410px; width: 1px; height: 106px; background: rgba(0,0,0,0.14)"></div>
+    <div style="position: absolute; left: 680px; top: 410px; width: 1px; height: 106px; background: rgba(0,0,0,0.14)"></div>
+    <div style="position: absolute; left: 840px; top: 410px; width: 1px; height: 106px; background: rgba(0,0,0,0.14)"></div>
+    <div style="position: absolute; left: 40px; top: 460px; width: 880px; height: 2px; background: rgba(0,0,0,0.10)"></div>
+  </div>
+  </sc-if>
+
+  <!-- ============ MANDIR & DINING ============ -->
+  <sc-if value="{{ isMandir }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Mandir and Dining" style="position: relative; width: 960px; height: 560px; border-radius: 12px; overflow: hidden; border: 1px solid #E4E0D8; background: {{ sel.wall }}; transition: background 0.4s; transform: scale({{ stageScale }}); transform-origin: top left">
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 50px; background: linear-gradient(#EFEDE8, #E5E2DB)"></div>
+    <!-- mandir unit -->
+    <div style="position: absolute; left: 60px; top: 60px; width: 250px; height: 400px; background: {{ sel.wood }}; transition: background 0.4s; border-radius: 4px"></div>
+    <div style="position: absolute; left: 88px; top: 92px; width: 194px; height: 250px; border-radius: 97px 97px 0 0; background: #FBF7EE; box-shadow: inset 0 0 30px rgba(255,238,200,0.95)"></div>
+    <div style="position: absolute; left: 118px; top: 92px; width: 134px; height: 190px; border-radius: 67px 67px 0 0; border: 3px solid color-mix(in oklab, {{ sel.wood }}, black 18%); border-bottom: none; box-sizing: border-box"></div>
+    <div style="position: absolute; left: 152px; top: 160px; width: 66px; height: 66px; border-radius: 50%; background: radial-gradient(circle, #FFF6DE 30%, {{ sel.accent }} 100%); box-shadow: 0 0 22px rgba(255,224,150,0.9)"></div>
+    <div style="position: absolute; left: 128px; top: 342px; width: 114px; height: 16px; background: color-mix(in oklab, {{ sel.wood }}, white 25%); border-radius: 2px"></div>
+    <div style="position: absolute; left: 108px; top: 358px; width: 154px; height: 16px; background: color-mix(in oklab, {{ sel.wood }}, white 12%); border-radius: 2px"></div>
+    <div style="position: absolute; left: 88px; top: 404px; width: 194px; height: 56px; background: color-mix(in oklab, {{ sel.wood }}, black 10%); border-radius: 2px"></div>
+    <div style="position: absolute; left: 183px; top: 404px; width: 2px; height: 56px; background: rgba(0,0,0,0.18)"></div>
+    <!-- partition arch mirror -->
+    <div style="position: absolute; left: 360px; top: 120px; width: 110px; height: 330px; border-radius: 55px; background: linear-gradient(160deg, #EEF2F3, #D4DDE0 55%, #E9EFF0); border: 3px solid #E8E2D4"></div>
+    <div style="position: absolute; left: 402px; top: 100px; width: 3px; height: 40px; background: #3A3530"></div>
+    <div style="position: absolute; left: 390px; top: 138px; width: 28px; height: 20px; border-radius: 0 0 12px 12px; background: #23211E"></div>
+    <!-- bar counter -->
+    <div style="position: absolute; left: 560px; top: 96px; width: 340px; height: 20px; background: {{ sel.wood }}; transition: background 0.4s; border-radius: 3px"></div>
+    <div style="position: absolute; left: 700px; top: 116px; width: 3px; height: 60px; background: #23211E"></div>
+    <div style="position: absolute; left: 780px; top: 116px; width: 3px; height: 84px; background: #23211E"></div>
+    <div style="position: absolute; left: 688px; top: 176px; width: 28px; height: 30px; background: #FFFFFF; clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%); box-shadow: 0 0 16px rgba(255,240,200,0.9)"></div>
+    <div style="position: absolute; left: 768px; top: 200px; width: 28px; height: 30px; background: #FFFFFF; clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%); box-shadow: 0 0 16px rgba(255,240,200,0.9)"></div>
+    <div style="position: absolute; left: 560px; top: 300px; width: 340px; height: 26px; background: linear-gradient(#FDFBF6, #EDE8DC); border-radius: 4px 4px 0 0; box-shadow: 0 2px 5px rgba(0,0,0,0.10)"></div>
+    <div style="position: absolute; left: 560px; top: 326px; width: 340px; height: 134px; background: repeating-linear-gradient(90deg, {{ sel.wood }} 0px, {{ sel.wood }} 10px, color-mix(in oklab, {{ sel.wood }}, black 14%) 10px, color-mix(in oklab, {{ sel.wood }}, black 14%) 12px); transition: background 0.4s"></div>
+    <!-- stools -->
+    <div style="position: absolute; left: 600px; top: 380px; width: 54px; height: 14px; border-radius: 7px; background: {{ sel.accent }}; transition: background 0.4s"></div>
+    <div style="position: absolute; left: 622px; top: 394px; width: 10px; height: 76px; background: #2E2C29"></div>
+    <div style="position: absolute; left: 604px; top: 470px; width: 46px; height: 5px; border-radius: 3px; background: #2E2C29"></div>
+    <div style="position: absolute; left: 700px; top: 380px; width: 54px; height: 14px; border-radius: 7px; background: {{ sel.accent }}; transition: background 0.4s"></div>
+    <div style="position: absolute; left: 722px; top: 394px; width: 10px; height: 76px; background: #2E2C29"></div>
+    <div style="position: absolute; left: 704px; top: 470px; width: 46px; height: 5px; border-radius: 3px; background: #2E2C29"></div>
+  </div>
+  </sc-if>
+
+  <!-- ============ KIDS BEDROOM ============ -->
+  <sc-if value="{{ isKids }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Kids Bedroom" style="position: relative; width: 960px; height: 560px; border-radius: 12px; overflow: hidden; border: 1px solid #E4E0D8; background: #F6F4EF; transform: scale({{ stageScale }}); transform-origin: top left">
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 50px; background: linear-gradient(#EFEDE8, #E5E2DB)"></div>
+    <!-- wardrobe -->
+    <div style="position: absolute; left: 30px; top: 40px; width: 210px; height: 470px; background: {{ sel.wardrobe }}; transition: background 0.4s; box-shadow: inset -1px 0 0 rgba(0,0,0,0.07)"></div>
+    <div style="position: absolute; left: 134px; top: 40px; width: 2px; height: 470px; background: rgba(0,0,0,0.12)"></div>
+    <div style="position: absolute; left: 62px; top: 40px; width: 146px; height: 200px; border-radius: 0 0 60px 60px; background: {{ sel.flute }}; transition: background 0.4s; opacity: 0.8"></div>
+    <!-- fluted arch band -->
+    <div style="position: absolute; left: 270px; top: 30px; width: 420px; height: 480px; background: repeating-linear-gradient(90deg, {{ sel.flute }} 0px, {{ sel.flute }} 7px, color-mix(in oklab, {{ sel.flute }}, black 14%) 7px, color-mix(in oklab, {{ sel.flute }}, black 14%) 9px); transition: background 0.4s"></div>
+    <!-- inner white panel with arch corner -->
+    <div style="position: absolute; left: 290px; top: 64px; width: 350px; height: 446px; background: {{ sel.bedWall }}; border-radius: 0 100px 0 0; transition: background 0.4s; box-shadow: 0 0 22px rgba(255,250,240,0.5)"></div>
+    <div style="position: absolute; left: 405px; top: 86px; width: 1px; height: 220px; background: rgba(0,0,0,0.12)"></div>
+    <div style="position: absolute; left: 520px; top: 86px; width: 1px; height: 220px; background: rgba(0,0,0,0.12)"></div>
+    <!-- wall lamp -->
+    <div style="position: absolute; left: 612px; top: 190px; width: 2px; height: 76px; background: #B99B6B; transform: rotate(12deg)"></div>
+    <div style="position: absolute; left: 600px; top: 236px; width: 14px; height: 14px; border-radius: 50%; background: #FFF7E6; box-shadow: 0 0 13px rgba(255,240,200,0.9)"></div>
+    <!-- bed -->
+    <div style="position: absolute; left: 330px; top: 296px; width: 260px; height: 72px; border-radius: 12px 12px 0 0; background: {{ sel.seat }}; transition: background 0.4s"></div>
+    <div style="position: absolute; left: 348px; top: 322px; width: 58px; height: 42px; border-radius: 8px; background: #F7F4EE"></div>
+    <div style="position: absolute; left: 500px; top: 322px; width: 58px; height: 42px; border-radius: 8px; background: #F7F4EE"></div>
+    <div style="position: absolute; left: 412px; top: 330px; width: 50px; height: 38px; border-radius: 8px; background: {{ sel.flute }}; transition: background 0.4s"></div>
+    <div style="position: absolute; left: 458px; top: 334px; width: 46px; height: 34px; border-radius: 8px; background: #D98E6E"></div>
+    <div style="position: absolute; left: 316px; top: 368px; width: 288px; height: 20px; background: #FDFCF9; border-radius: 3px"></div>
+    <div style="position: absolute; left: 310px; top: 386px; width: 300px; height: 72px; border-radius: 6px 6px 10px 10px; background: linear-gradient(#DCC9AE, #CDB897)"></div>
+    <div style="position: absolute; left: 310px; top: 456px; width: 300px; height: 40px; background: #F2EEE6; border-radius: 0 0 4px 4px"></div>
+    <!-- study niche -->
+    <div style="position: absolute; left: 716px; top: 40px; width: 100px; height: 100px; background: {{ sel.wardrobe }}; transition: background 0.4s; box-shadow: inset 0 -1px 0 rgba(0,0,0,0.08)"></div>
+    <div style="position: absolute; left: 716px; top: 150px; width: 100px; height: 190px; background: repeating-linear-gradient(90deg, {{ sel.study }} 0px, {{ sel.study }} 6px, color-mix(in oklab, {{ sel.study }}, black 12%) 6px, color-mix(in oklab, {{ sel.study }}, black 12%) 8px); transition: background 0.4s"></div>
+    <div style="position: absolute; left: 716px; top: 168px; width: 100px; height: 8px; background: #FFFFFF; box-shadow: 0 4px 10px rgba(255,248,225,0.6)"></div>
+    <div style="position: absolute; left: 716px; top: 288px; width: 100px; height: 22px; background: #FFFFFF; box-shadow: 0 2px 4px rgba(0,0,0,0.10)"></div>
+    <!-- window seat -->
+    <div style="position: absolute; left: 836px; top: 40px; width: 100px; height: 250px; background: linear-gradient(#D9D3C5, #CCC5B4); border-radius: 2px"></div>
+    <div style="position: absolute; left: 836px; top: 290px; width: 100px; height: 26px; background: #9FB4C4"></div>
+    <div style="position: absolute; left: 716px; top: 380px; width: 220px; height: 130px; background: {{ sel.wardrobe }}; transition: background 0.4s"></div>
+    <div style="position: absolute; left: 716px; top: 354px; width: 220px; height: 30px; border-radius: 6px; background: {{ sel.seat }}; transition: background 0.4s"></div>
+    <div style="position: absolute; left: 740px; top: 328px; width: 40px; height: 28px; border-radius: 5px; background: #35506B"></div>
+    <div style="position: absolute; left: 786px; top: 332px; width: 36px; height: 24px; border-radius: 5px; background: #F7F4EE"></div>
+  </div>
+  </sc-if>
+
+  <!-- ============ MASTER BEDROOM ============ -->
+  <sc-if value="{{ isMaster }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Master Bedroom" style="position: relative; width: 960px; height: 560px; border-radius: 12px; overflow: hidden; border: 1px solid #E4E0D8; background: #F5F2EE; transform: scale({{ stageScale }}); transform-origin: top left">
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 50px; background: linear-gradient(#EFEDE8, #E5E2DB)"></div>
+    <!-- ceiling cove -->
+    <div style="position: absolute; top: 0; left: 220px; width: 460px; height: 30px; background: #FFFFFF; box-shadow: 0 10px 26px rgba(255,244,224,0.6)"></div>
+    <!-- mauve feature wall -->
+    <div style="position: absolute; left: 120px; top: 30px; width: 560px; height: 480px; background: {{ sel.wall }}; transition: background 0.4s"></div>
+    <!-- arch mirror left -->
+    <div style="position: absolute; left: 152px; top: 120px; width: 74px; height: 250px; border-radius: 37px; background: linear-gradient(160deg, #F2F4F4, #DCE2E4 55%, #EDF1F1); box-shadow: 0 0 0 3px #FFF6E8, 0 0 18px rgba(255,240,210,0.8)"></div>
+    <!-- floral headboard arch -->
+    <div style="position: absolute; left: 300px; top: 88px; width: 260px; height: 300px; border-radius: 60px 60px 0 0; background-color: {{ sel.headboard }}; background-image: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85) 0 7px, transparent 8px), radial-gradient(circle at 68% 22%, rgba(255,255,255,0.8) 0 6px, transparent 7px), radial-gradient(circle at 50% 55%, rgba(255,255,255,0.8) 0 8px, transparent 9px), radial-gradient(circle at 22% 70%, rgba(255,255,255,0.75) 0 6px, transparent 7px), radial-gradient(circle at 78% 62%, rgba(196,90,110,0.55) 0 5px, transparent 6px), radial-gradient(circle at 42% 24%, rgba(196,90,110,0.5) 0 4px, transparent 5px); transition: background-color 0.4s; box-shadow: 0 0 0 4px #FFF6E8, 0 0 24px rgba(255,240,210,0.85)"></div>
+    <!-- side floral pill -->
+    <div style="position: absolute; left: 590px; top: 150px; width: 62px; height: 240px; border-radius: 31px; background-color: {{ sel.headboard }}; background-image: radial-gradient(circle at 40% 25%, rgba(255,255,255,0.85) 0 5px, transparent 6px), radial-gradient(circle at 55% 60%, rgba(255,255,255,0.8) 0 6px, transparent 7px), radial-gradient(circle at 45% 85%, rgba(196,90,110,0.5) 0 4px, transparent 5px); transition: background-color 0.4s; box-shadow: 0 0 0 3px #FFF6E8, 0 0 16px rgba(255,240,210,0.8)"></div>
+    <!-- bed -->
+    <div style="position: absolute; left: 320px; top: 300px; width: 240px; height: 78px; border-radius: 14px 14px 0 0; background: {{ sel.bedhead }}; transition: background 0.4s"></div>
+    <div style="position: absolute; left: 338px; top: 328px; width: 54px; height: 42px; border-radius: 8px; background: #F7F4EE"></div>
+    <div style="position: absolute; left: 478px; top: 328px; width: 54px; height: 42px; border-radius: 8px; background: #F7F4EE"></div>
+    <div style="position: absolute; left: 396px; top: 336px; width: 46px; height: 36px; border-radius: 8px; background: #5F7A5A"></div>
+    <div style="position: absolute; left: 438px; top: 340px; width: 44px; height: 32px; border-radius: 8px; background: #D98E6E"></div>
+    <div style="position: absolute; left: 306px; top: 378px; width: 268px; height: 20px; background: #FDFCF9; border-radius: 3px"></div>
+    <div style="position: absolute; left: 300px; top: 396px; width: 280px; height: 70px; border-radius: 6px 6px 10px 10px; background: linear-gradient({{ sel.bedding }}, color-mix(in oklab, {{ sel.bedding }}, black 10%)); transition: background 0.4s"></div>
+    <div style="position: absolute; left: 300px; top: 464px; width: 280px; height: 36px; background: #F2EEE6; border-radius: 0 0 4px 4px"></div>
+    <!-- side table -->
+    <div style="position: absolute; left: 226px; top: 400px; width: 60px; height: 34px; background: #F5F1EA; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.10)"></div>
+    <!-- wardrobe right -->
+    <div style="position: absolute; left: 700px; top: 30px; width: 236px; height: 480px; background: {{ sel.wardrobe }}; transition: background 0.4s"></div>
+    <div style="position: absolute; left: 700px; top: 130px; width: 236px; height: 2px; background: rgba(0,0,0,0.08)"></div>
+    <div style="position: absolute; left: 778px; top: 30px; width: 2px; height: 480px; background: rgba(0,0,0,0.08)"></div>
+    <div style="position: absolute; left: 858px; top: 30px; width: 2px; height: 480px; background: rgba(0,0,0,0.08)"></div>
+    <div style="position: absolute; left: 700px; top: 300px; width: 236px; height: 30px; background: repeating-linear-gradient(90deg, {{ sel.band }} 0px, {{ sel.band }} 5px, color-mix(in oklab, {{ sel.band }}, black 14%) 5px, color-mix(in oklab, {{ sel.band }}, black 14%) 7px); transition: background 0.4s"></div>
+    <div style="position: absolute; left: 766px; top: 250px; width: 5px; height: 120px; border-radius: 3px; background: #2E2C29"></div>
+    <div style="position: absolute; left: 846px; top: 250px; width: 5px; height: 120px; border-radius: 3px; background: #2E2C29"></div>
+  </div>
+  </sc-if>
+
+  <!-- ============ TOP PLAN (all rooms) ============ -->
+  <sc-if value="{{ isTop }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Top plan" style="position: relative; width: 960px; height: 560px; border-radius: 12px; overflow: hidden; border: 1px solid #E4E0D8; background: #EBE8E0; transform: scale({{ stageScale }}); transform-origin: top left">
+    <div style="position: absolute; left: 54px; top: 44px; width: 852px; height: 472px; background: #F8F6F1; border: 7px solid #A8A093; box-sizing: border-box"></div>
+    <sc-for list="{{ planBlocks }}" as="b" hint-placeholder-count="5">
+      <div style="{{ b.style }}">{{ b.label }}</div>
+    </sc-for>
+    <div style="position: absolute; right: 16px; bottom: 12px; font-size: 11px; color: #8A857B">top plan · not to scale</div>
+  </div>
+  </sc-if>
+
+  <!-- ============ 3D ROOM (all rooms) ============ -->
+  <sc-if value="{{ is3D }}" hint-placeholder-val="{{ false }}">
+  <div onPointerDown="{{ orbitDown }}" onPointerMove="{{ orbitMove }}" onPointerUp="{{ orbitUp }}" onPointerLeave="{{ orbitUp }}" style="position: relative; width: 960px; height: 560px; border-radius: 12px; overflow: hidden; border: 1px solid #E4E0D8; background: linear-gradient(#FBFAF7, #EFECE5); transform: scale({{ stageScale }}); transform-origin: top left; perspective: 1000px; perspective-origin: 50% 42%; cursor: grab; touch-action: none; user-select: none">
+    <div style="{{ orbitInner }}">
+      <div style="{{ w3dBack }}">
+        <sc-for list="{{ backDecor }}" as="bd" hint-placeholder-count="4">
+          <div style="{{ bd }}"></div>
+        </sc-for>
+      </div>
+      <div style="{{ w3dLeft }}">
+        <sc-for list="{{ leftDecor }}" as="ld" hint-placeholder-count="4">
+          <div style="{{ ld }}"></div>
+        </sc-for>
+      </div>
+      <div style="{{ w3dRight }}">
+        <sc-for list="{{ rightDecor }}" as="rd" hint-placeholder-count="4">
+          <div style="{{ rd }}"></div>
+        </sc-for>
+      </div>
+      <div style="{{ w3dFloor }}"></div>
+      <div style="{{ w3dCeil }}"></div>
+      <div style="{{ f3dTop }}"></div>
+      <div style="{{ f3dFront }}"></div>
+    </div>
+    <div style="position: absolute; top: 14px; left: 0; right: 0; display: flex; gap: 6px; justify-content: center">
+      <sc-for list="{{ angleBtns }}" as="ab" hint-placeholder-count="4">
+        <button onClick="{{ ab.pick }}" style="{{ ab.style }}">{{ ab.name }}</button>
+      </sc-for>
+    </div>
+    <div style="position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; font-size: 12px; color: #8A857B; pointer-events: none">drag to look around · or pick an angle</div>
+  </div>
+  </sc-if>
+  </div>
+
+  <!-- mixer sidebar -->
+  <div style="flex: 0 0 200px; align-self: flex-start; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+      <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857B; font-weight: 700">Mix colors</div>
+      <button onClick="{{ resetMix }}" style="font-family: Archivo, Helvetica, sans-serif; font-size: 11px; font-weight: 600; color: #23211E; background: #F4F2EE; border: 1px solid #E4E0D8; border-radius: 6px; padding: 4px 8px; cursor: pointer">Reset</button>
+    </div>
+    <div style="font-size: 11.5px; color: #8A857B; line-height: 1.5; margin-top: -6px">Surfaces specific to this room — pick any color from any of its palettes.</div>
+    <sc-for list="{{ mixer }}" as="m" hint-placeholder-count="5">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <div style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8A857B; font-weight: 600">{{ m.label }}</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px">
+          <sc-for list="{{ m.swatches }}" as="s" hint-placeholder-count="4">
+            <button onClick="{{ s.pick }}" title="{{ s.title }}" style="{{ s.style }}"></button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  </div>
+
+  <!-- legend -->
+  <div style="width: 100%; max-width: 1190px; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; padding: 18px 22px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px">
+    <sc-for list="{{ legend }}" as="g" hint-placeholder-count="5">
+      <div style="display: flex; flex-direction: column; gap: 5px">
+        <div style="display: flex; align-items: center; gap: 7px"><span style="width: 14px; height: 14px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.1); background: {{ g.color }}"></span><span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857B; font-weight: 600">{{ g.label }}</span></div>
+        <div style="font-size: 13px; line-height: 1.4">{{ g.desc }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <template id="__bundler_thumbnail">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <rect width="100" height="100" fill="#AEBBAC"></rect>
+      <rect x="30" y="38" width="18" height="26" rx="3" fill="#C9A876"></rect>
+      <rect x="52" y="38" width="18" height="26" rx="3" fill="#FBF9F2"></rect>
+    </svg>
+  </template>
+
+  <div style="font-size: 12px; color: #8A857B; max-width: 760px; text-align: center; line-height: 1.6">Stylized elevations traced from your 2BHK furniture-design PDF. First palette in each room is the original scheme from the renders; the rest are alternates.</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1220, &quot;height&quot;: 980}}">
+class Component extends DCLogic {
+  state = { room: 'living', selByRoom: {}, ovByRoom: {}, stageScale: 1, view: 'front', yaw: -16, pitch: 6 };
+
+  views = [
+    { id: 'front', name: 'Front elevation' },
+    { id: 'top', name: 'Top plan' },
+    { id: '3d', name: '3D room' }
+  ];
+
+  orbitDown = (e) => {
+    this._drag = { x: e.clientX, y: e.clientY, yaw: this.state.yaw, pitch: this.state.pitch };
+  };
+  orbitMove = (e) => {
+    if (!this._drag) return;
+    const yaw = Math.max(-58, Math.min(58, this._drag.yaw + (e.clientX - this._drag.x) * 0.09));
+    const pitch = Math.max(-8, Math.min(30, this._drag.pitch - (e.clientY - this._drag.y) * 0.05));
+    this.setState({ yaw, pitch });
+  };
+  orbitUp = () => { this._drag = null; };
+
+  _dec(items, cv) {
+    return (items || []).map(d => {
+      let bg;
+      const c = d.key ? cv(d.key) : (d.color || '#EEE');
+      if (d.kind === 'flute') bg = 'background:repeating-linear-gradient(90deg,' + c + ' 0px,' + c + ' 7px,color-mix(in oklab,' + c + ',black 14%) 7px,color-mix(in oklab,' + c + ',black 14%) 9px);';
+      else if (d.kind === 'slat') bg = 'background:repeating-linear-gradient(90deg,' + c + ' 0px,' + c + ' 10px,color-mix(in oklab,' + c + ',black 14%) 10px,color-mix(in oklab,' + c + ',black 14%) 12px);';
+      else if (d.kind === 'glass') bg = 'background:repeating-linear-gradient(90deg,#F2F2EE 0px,#F2F2EE 5px,#E2E2DC 5px,#E2E2DC 7px);border:3px solid #3A3530;box-sizing:border-box;';
+      else if (d.kind === 'mirror') bg = 'background:linear-gradient(160deg,#EEF2F3,#D4DDE0 55%,#E9EFF0);';
+      else if (d.kind === 'window') bg = 'background:linear-gradient(#D9D3C5,#CCC5B4);box-shadow:inset 0 -8px 14px rgba(0,0,0,0.08);';
+      else if (d.kind === 'outline') bg = 'background:transparent;border:2px solid rgba(0,0,0,0.10);box-sizing:border-box;';
+      else if (d.kind === 'dark') bg = 'background:linear-gradient(160deg,#2A2E33,#101418);';
+      else if (d.kind === 'glow') bg = 'background:radial-gradient(circle,#FFF6DE 30%,' + c + ' 100%);box-shadow:0 0 22px rgba(255,224,150,0.9);';
+      else if (d.kind === 'tile') bg = 'background-color:' + c + ';background-image:repeating-linear-gradient(45deg,rgba(90,110,125,0.30) 0px,rgba(90,110,125,0.30) 3px,transparent 3px,transparent 22px),repeating-linear-gradient(-45deg,rgba(90,110,125,0.30) 0px,rgba(90,110,125,0.30) 3px,transparent 3px,transparent 22px);';
+      else if (d.kind === 'floral') bg = 'background-color:' + c + ';background-image:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.85) 0 7px,transparent 8px),radial-gradient(circle at 68% 22%,rgba(255,255,255,0.8) 0 6px,transparent 7px),radial-gradient(circle at 50% 55%,rgba(255,255,255,0.8) 0 8px,transparent 9px),radial-gradient(circle at 22% 70%,rgba(255,255,255,0.75) 0 6px,transparent 7px),radial-gradient(circle at 78% 62%,rgba(196,90,110,0.5) 0 5px,transparent 6px);box-shadow:0 0 0 4px #FFF6E8,0 0 24px rgba(255,240,210,0.85);';
+      else bg = 'background:' + c + ';';
+      return 'position:absolute;left:' + d.l + '%;top:' + d.t + '%;width:' + d.w + '%;height:' + d.h + '%;' + bg + 'border-radius:' + (d.r || '0') + ';transition:background 0.4s;' + (d.op ? 'opacity:' + d.op + ';' : '') + (d.extra || '');
+    });
+  }
+  stageWrapRef = React.createRef();
+
+  componentDidMount() {
+    this._ro = new ResizeObserver(() => this._fit());
+    if (this.stageWrapRef.current) this._ro.observe(this.stageWrapRef.current);
+    this._fit();
+  }
+  componentWillUnmount() { if (this._ro) this._ro.disconnect(); }
+  _fit() {
+    const el = this.stageWrapRef.current;
+    if (!el) return;
+    const s = Math.min(1, el.clientWidth / 960);
+    if (Math.abs(s - this.state.stageScale) > 0.005) this.setState({ stageScale: s });
+  }
+
+  rooms = {
+    living: {
+      name: 'Living Room',
+      plan: [
+        { x: 74, y: 140, w: 30, h: 280, key: 'tvPanel', label: '' },
+        { x: 104, y: 160, w: 12, h: 240, key: 'wood', label: '' },
+        { x: 828, y: 130, w: 62, h: 300, key: 'fabric', label: '' },
+        { x: 400, y: 210, w: 250, h: 180, r: 90, color: '#EAE5D9', label: 'Rug' },
+        { x: 478, y: 262, w: 100, h: 74, r: 37, key: 'wood', label: '' }
+      ],
+      w3d: { back: 'sofaWall', left: '#F3F1EC', right: '#F3F1EC', furn: { type: 'sofa', front: 'fabric', top: 'fabric' },
+        decor: {
+          back: [
+            { l: 8, t: 10, w: 12, h: 55, kind: 'outline', r: '999px' },
+            { l: 26, t: 12, w: 10, h: 44, kind: 'outline', r: '999px' },
+            { l: 64, t: 12, w: 11, h: 50, kind: 'outline', r: '999px' },
+            { l: 82, t: 16, w: 8, h: 44, kind: 'outline', r: '999px' },
+            { l: 11.5, t: 28, w: 5, h: 9, kind: 'mirror', r: '50%' },
+            { l: 28.5, t: 24, w: 4.6, h: 8.4, kind: 'mirror', r: '50%' },
+            { l: 67, t: 27, w: 4.6, h: 8.4, kind: 'mirror', r: '50%' },
+            { l: 33, t: 74, w: 34, h: 26, key: 'fabric', r: '10px 10px 0 0' },
+            { l: 35, t: 79, w: 6, h: 10, color: '#E9B86B', r: '6px' },
+            { l: 42, t: 80, w: 6, h: 9, color: '#F5F1E8', r: '6px' },
+            { l: 55, t: 79, w: 6, h: 10, color: '#35506B', r: '6px' }
+          ],
+          left: [
+            { l: 3, t: 8, w: 8, h: 84, kind: 'glass' },
+            { l: 15, t: 8, w: 40, h: 66, key: 'tvPanel' },
+            { l: 27, t: 8, w: 1, h: 66, color: '#3E4247' },
+            { l: 43, t: 8, w: 1, h: 66, color: '#3E4247' },
+            { l: 24, t: 24, w: 21, h: 22, kind: 'dark', r: '3px' },
+            { l: 15, t: 74, w: 40, h: 5, kind: 'slat', key: 'wood' },
+            { l: 15, t: 79, w: 40, h: 13, key: 'baseUnit' },
+            { l: 64, t: 14, w: 15, h: 78, color: '#C09A6B', r: '3px' },
+            { l: 77, t: 50, w: 0.6, h: 6, color: '#3A3530', r: '2px' }
+          ],
+          right: [
+            { l: 14, t: 10, w: 30, h: 55, kind: 'window' },
+            { l: 14, t: 65, w: 30, h: 5, color: '#9FB4C4' },
+            { l: 58, t: 10, w: 14, h: 82, kind: 'flute', key: 'wood' }
+          ]
+        } },
+      roles: [
+        { key: 'sofaWall', label: 'Sofa back wall' },
+        { key: 'tvPanel', label: 'TV unit panel' },
+        { key: 'baseUnit', label: 'Base cabinets' },
+        { key: 'wood', label: 'Wood slats / ledge' },
+        { key: 'fabric', label: 'Sofa fabric' }
+      ],
+      palettes: [
+        { id: 'L1', name: 'Original · Sage & Marble', sofaWall: '#AEBBAC', tvPanel: '#F2EFE8', baseUnit: '#F5F2EA', wood: '#C9A876', fabric: '#8A6F5E',
+          d: { sofaWall: 'Sage green panel, oval grooves + mirrors', tvPanel: 'White-gold marble laminate', baseUnit: 'Warm white matte', wood: 'Light oak rafter slats', fabric: 'Mocha upholstery' } },
+        { id: 'L2', name: 'Powder Blue', sofaWall: '#A9BFCC', tvPanel: '#F4F2ED', baseUnit: '#FBFAF6', wood: '#C9A876', fabric: '#6E7F8D',
+          d: { sofaWall: 'Powder blue panel', tvPanel: 'Soft white marble', baseUnit: 'Crisp white matte', wood: 'Light oak', fabric: 'Slate blue upholstery' } },
+        { id: 'L3', name: 'Warm Taupe', sofaWall: '#C9BBA8', tvPanel: '#F7F4EE', baseUnit: '#F1ECE2', wood: '#B08968', fabric: '#7E6A58',
+          d: { sofaWall: 'Taupe panel', tvPanel: 'Ivory marble', baseUnit: 'Cream matte', wood: 'Light walnut', fabric: 'Umber upholstery' } },
+        { id: 'L4', name: 'Blush Mauve', sofaWall: '#C5AEB0', tvPanel: '#F8F5F1', baseUnit: '#F5F0EA', wood: '#C9A876', fabric: '#8A6F72',
+          d: { sofaWall: 'Dusty mauve panel', tvPanel: 'Warm white marble', baseUnit: 'Ivory matte', wood: 'Light oak', fabric: 'Rosewood upholstery' } },
+        { id: 'L5', name: 'Nordic Dawn', sofaWall: '#A8B49A', tvPanel: '#F6F3ED', baseUnit: '#F2EEE6', wood: '#D9C9A8', fabric: '#7E8464',
+          d: { sofaWall: 'Sage green panel', tvPanel: 'Frosty white marble', baseUnit: 'Off-white matte', wood: 'Light oak slats', fabric: 'Olive upholstery' } },
+        { id: 'L6', name: 'Cloud & Ash', sofaWall: '#C9C6C0', tvPanel: '#FAFAF8', baseUnit: '#F3F3F2', wood: '#B8AC96', fabric: '#3A3A38',
+          d: { sofaWall: 'Grey-washed ash panel', tvPanel: 'Snow white marble', baseUnit: 'Super-matte white', wood: 'Smoked oak slats', fabric: 'Charcoal upholstery' } },
+        { id: 'L7', name: 'Olive Grove', sofaWall: '#7E8464', tvPanel: '#FBF9F2', baseUnit: '#F6F4EC', wood: '#D8B98A', fabric: '#5E634B',
+          d: { sofaWall: 'Deep olive panel', tvPanel: 'Warm white marble', baseUnit: 'Cream matte', wood: 'Honey oak slats', fabric: 'Moss upholstery' } },
+        { id: 'L8', name: 'Forest & Cream', sofaWall: '#4E6B58', tvPanel: '#F8F5EA', baseUnit: '#F5F4EC', wood: '#C9BD9C', fabric: '#3E5546',
+          d: { sofaWall: 'Forest green panel', tvPanel: 'Cream marble', baseUnit: 'Cream matte', wood: 'Raffia-tone slats', fabric: 'Pine upholstery' } },
+        { id: 'L9', name: 'Denim Day', sofaWall: '#5C7290', tvPanel: '#FBFBF9', baseUnit: '#F4F5F4', wood: '#D8CDB8', fabric: '#48596F',
+          d: { sofaWall: 'Denim blue panel', tvPanel: 'Crisp white marble', baseUnit: 'Crisp white matte', wood: 'Greige oak slats', fabric: 'Navy upholstery' } },
+        { id: 'L10', name: 'Butter & Bone', sofaWall: '#F0DFA4', tvPanel: '#FAF7EF', baseUnit: '#F4EFE3', wood: '#E3D3AC', fabric: '#B08968',
+          d: { sofaWall: 'Butter yellow panel', tvPanel: 'Bone white marble', baseUnit: 'Bone matte', wood: 'Pale sand slats', fabric: 'Camel upholstery' } }
+      ]
+    },
+    kitchen: {
+      name: 'Kitchen',
+      plan: [
+        { x: 61, y: 51, w: 845, h: 66, key: 'baseCab', label: 'Counter run' },
+        { x: 61, y: 117, w: 66, h: 290, key: 'baseCab', label: '' },
+        { x: 300, y: 62, w: 84, h: 36, color: '#C9CDCF', label: '' },
+        { x: 610, y: 62, w: 84, h: 36, color: '#26292D', label: '' },
+        { x: 61, y: 430, w: 66, h: 76, color: '#C2C5C7', label: '' },
+        { x: 780, y: 300, w: 116, h: 46, color: '#C9A876', label: 'Bar' }
+      ],
+      w3d: { back: '#F6F5F1', left: '#F6F5F1', right: '#F3F1EC', furn: null,
+        decor: {
+          back: [
+            { l: 0, t: 0, w: 100, h: 19, key: 'tallCab' },
+            { l: 0, t: 19, w: 68, h: 26, key: 'upperCab' },
+            { l: 8, t: 21, w: 10, h: 21, kind: 'glass' },
+            { l: 30, t: 21, w: 10, h: 21, kind: 'glass' },
+            { l: 52, t: 21, w: 10, h: 21, kind: 'glass' },
+            { l: 70, t: 19, w: 14, h: 32, kind: 'dark', r: '3px' },
+            { l: 87, t: 19, w: 12, h: 32, kind: 'window' },
+            { l: 0, t: 45, w: 68, h: 6, kind: 'slat', key: '#C9A876' },
+            { l: 0, t: 51, w: 100, h: 20, kind: 'tile', key: 'splash' },
+            { l: 0, t: 71, w: 100, h: 4, key: 'counter' },
+            { l: 0, t: 75, w: 100, h: 25, key: 'baseCab' },
+            { l: 20, t: 75, w: 0.2, h: 25, color: 'rgba(0,0,0,0.14)' },
+            { l: 40, t: 75, w: 0.2, h: 25, color: 'rgba(0,0,0,0.14)' },
+            { l: 60, t: 75, w: 0.2, h: 25, color: 'rgba(0,0,0,0.14)' },
+            { l: 80, t: 75, w: 0.2, h: 25, color: 'rgba(0,0,0,0.14)' }
+          ],
+          left: [
+            { l: 0, t: 0, w: 100, h: 19, key: 'tallCab' },
+            { l: 0, t: 19, w: 100, h: 26, key: 'upperCab' },
+            { l: 12, t: 21, w: 14, h: 21, kind: 'glass' },
+            { l: 44, t: 21, w: 14, h: 21, kind: 'glass' },
+            { l: 76, t: 21, w: 14, h: 21, kind: 'glass' },
+            { l: 0, t: 45, w: 100, h: 6, kind: 'slat', key: '#C9A876' },
+            { l: 0, t: 51, w: 100, h: 20, kind: 'tile', key: 'splash' },
+            { l: 0, t: 71, w: 100, h: 4, key: 'counter' },
+            { l: 0, t: 75, w: 100, h: 25, key: 'baseCab' }
+          ],
+          right: [
+            { l: 26, t: 12, w: 48, h: 50, kind: 'window' },
+            { l: 26, t: 62, w: 48, h: 5, color: '#9FB4C4' },
+            { l: 0, t: 71, w: 100, h: 4, key: 'counter' },
+            { l: 0, t: 75, w: 100, h: 25, key: 'baseCab' }
+          ]
+        } },
+      roles: [
+        { key: 'baseCab', label: 'Base cabinets' },
+        { key: 'upperCab', label: 'Upper cabinets' },
+        { key: 'tallCab', label: 'Loft / tall units' },
+        { key: 'splash', label: 'Backsplash tile' },
+        { key: 'counter', label: 'Countertop' }
+      ],
+      palettes: [
+        { id: 'K1', name: 'Original · Slate Blue Gloss', baseCab: '#8CA3AB', upperCab: '#F3F0E9', tallCab: '#8CA3AB', splash: '#E8E9E4', counter: '#2E2C29',
+          d: { baseCab: 'Slate blue high-gloss acrylic', upperCab: 'Warm white + fluted glass', tallCab: 'Slate blue gloss lofts', splash: 'Moroccan patterned tile', counter: 'Black galaxy granite' } },
+        { id: 'K2', name: 'Olive Fresh', baseCab: '#7E8464', upperCab: '#F6F3EA', tallCab: '#7E8464', splash: '#EAE7D8', counter: '#2E2C29',
+          d: { baseCab: 'Olive matte acrylic', upperCab: 'Warm white uppers', tallCab: 'Olive lofts', splash: 'Cream patterned tile', counter: 'Black granite' } },
+        { id: 'K3', name: 'Terracotta Warm', baseCab: '#B97B5E', upperCab: '#F8F4EC', tallCab: '#B97B5E', splash: '#F0E4D6', counter: '#3A3530',
+          d: { baseCab: 'Terracotta soft-gloss', upperCab: 'Ivory uppers', tallCab: 'Terracotta lofts', splash: 'Sand patterned tile', counter: 'Charcoal quartz' } },
+        { id: 'K4', name: 'Charcoal & Quartz', baseCab: '#4A4F52', upperCab: '#F4F2ED', tallCab: '#4A4F52', splash: '#E6E6E0', counter: '#EAE6DC',
+          d: { baseCab: 'Charcoal super-matte', upperCab: 'White uppers', tallCab: 'Charcoal lofts', splash: 'Grey patterned tile', counter: 'White quartz' } },
+        { id: 'K5', name: 'Nordic Dawn', baseCab: '#A8B49A', upperCab: '#F6F3ED', tallCab: '#A8B49A', splash: '#EDE8DA', counter: '#2E2C29',
+          d: { baseCab: 'Sage green matte', upperCab: 'Frosty white uppers', tallCab: 'Sage lofts', splash: 'Oat patterned tile', counter: 'Black granite' } },
+        { id: 'K6', name: 'Cloud & Ash', baseCab: '#C9C6C0', upperCab: '#FAFAF8', tallCab: '#3A3A38', splash: '#E9E9E6', counter: '#EAE6DC',
+          d: { baseCab: 'Ash grey super-matte', upperCab: 'Snow white uppers', tallCab: 'Charcoal lofts', splash: 'Pale grey tile', counter: 'White quartz' } },
+        { id: 'K7', name: 'Forest & Cream', baseCab: '#4E6B58', upperCab: '#F8F5EA', tallCab: '#4E6B58', splash: '#E8E3D2', counter: '#EAE6DC',
+          d: { baseCab: 'Forest green matte', upperCab: 'Cream uppers', tallCab: 'Forest lofts', splash: 'Cream patterned tile', counter: 'White quartz' } },
+        { id: 'K8', name: 'Denim Day', baseCab: '#5C7290', upperCab: '#FBFBF9', tallCab: '#5C7290', splash: '#E4E7EA', counter: '#EAE6DC',
+          d: { baseCab: 'Denim blue matte', upperCab: 'Crisp white uppers', tallCab: 'Denim lofts', splash: 'Cool grey tile', counter: 'White quartz' } },
+        { id: 'K9', name: 'Butter & Bone', baseCab: '#E3D3AC', upperCab: '#FAF7EF', tallCab: '#F0DFA4', splash: '#F2EBD9', counter: '#3A3530',
+          d: { baseCab: 'Pale sand soft-gloss', upperCab: 'Bone white uppers', tallCab: 'Butter yellow lofts', splash: 'Ivory patterned tile', counter: 'Charcoal quartz' } },
+        { id: 'K10', name: 'Blush Calm', baseCab: '#DBAA9A', upperCab: '#F9F4F1', tallCab: '#DBAA9A', splash: '#F2E4DD', counter: '#3A3530',
+          d: { baseCab: 'Dusty rose matte', upperCab: 'Blush-white uppers', tallCab: 'Dusty rose lofts', splash: 'Blush patterned tile', counter: 'Charcoal quartz' } }
+      ]
+    },
+    mandir: {
+      name: 'Mandir & Dining',
+      plan: [
+        { x: 61, y: 51, w: 180, h: 50, key: 'wood', label: 'Mandir' },
+        { x: 700, y: 51, w: 190, h: 50, key: 'wood', label: 'Bar' },
+        { x: 724, y: 118, w: 36, h: 36, r: 18, key: 'accent', label: '' },
+        { x: 794, y: 118, w: 36, h: 36, r: 18, key: 'accent', label: '' },
+        { x: 410, y: 240, w: 210, h: 120, r: 10, key: 'wood', label: 'Dining' },
+        { x: 440, y: 204, w: 54, h: 30, color: '#E8E2D4', label: '' },
+        { x: 534, y: 204, w: 54, h: 30, color: '#E8E2D4', label: '' },
+        { x: 440, y: 366, w: 54, h: 30, color: '#E8E2D4', label: '' },
+        { x: 534, y: 366, w: 54, h: 30, color: '#E8E2D4', label: '' }
+      ],
+      w3d: { back: 'wall', left: 'wall', right: 'wall', furn: { type: 'table', front: 'wood', top: '#F2EFE7' },
+        decor: {
+          back: [
+            { l: 42, t: 18, w: 12, h: 62, kind: 'mirror', r: '999px', extra: 'border:3px solid #E8E2D4;box-sizing:border-box;' },
+            { l: 47.6, t: 6, w: 0.5, h: 12, color: '#3A3530' },
+            { l: 20, t: 26, w: 8, h: 14, kind: 'outline', r: '999px' },
+            { l: 70, t: 26, w: 8, h: 14, kind: 'outline', r: '999px' }
+          ],
+          left: [
+            { l: 20, t: 8, w: 42, h: 80, key: 'wood', r: '4px' },
+            { l: 26, t: 14, w: 30, h: 46, color: '#FBF7EE', r: '50% 50% 0 0', extra: 'box-shadow:inset 0 0 30px rgba(255,238,200,0.95);' },
+            { l: 35, t: 28, w: 12, h: 18, kind: 'glow', key: 'accent', r: '50%' },
+            { l: 28, t: 62, w: 26, h: 3.6, color: '#E8DFC8', r: '2px' },
+            { l: 26, t: 68, w: 30, h: 5, color: '#E2D5BA', r: '2px' },
+            { l: 26, t: 76, w: 30, h: 12, key: 'wood', extra: 'filter:brightness(0.9);' }
+          ],
+          right: [
+            { l: 8, t: 10, w: 84, h: 5, key: 'wood', r: '3px' },
+            { l: 8, t: 48, w: 84, h: 5, color: '#FDFBF6', r: '4px 4px 0 0' },
+            { l: 8, t: 53, w: 84, h: 28, kind: 'slat', key: 'wood' },
+            { l: 22, t: 84, w: 12, h: 4, key: 'accent', r: '999px' },
+            { l: 52, t: 84, w: 12, h: 4, key: 'accent', r: '999px' }
+          ]
+        } },
+      roles: [
+        { key: 'wood', label: 'Mandir / bar wood' },
+        { key: 'wall', label: 'Wall tone' },
+        { key: 'accent', label: 'Accent (glow + stools)' }
+      ],
+      palettes: [
+        { id: 'D1', name: 'Original · Honey Oak', wood: '#C9A876', wall: '#F4F1EA', accent: '#E8D9B8',
+          d: { wood: 'Honey oak mandir + bar cladding', wall: 'Warm white walls', accent: 'Soft brass glow, tan stools' } },
+        { id: 'D2', name: 'Walnut Deep', wood: '#8A6844', wall: '#F6F2EC', accent: '#D9C9A8',
+          d: { wood: 'Dark walnut woodgrain', wall: 'Ivory walls', accent: 'Champagne glow, sand stools' } },
+        { id: 'D3', name: 'White & Sage', wood: '#EDE7D9', wall: '#EDF0E8', accent: '#A8B49A',
+          d: { wood: 'Warm white laminate mandir', wall: 'Sage-tinted walls', accent: 'Sage stool seats' } },
+        { id: 'D4', name: 'Oak & Rose', wood: '#C9A876', wall: '#F3E9E7', accent: '#DBAA9A',
+          d: { wood: 'Honey oak', wall: 'Blush-tinted walls', accent: 'Dusty rose stools' } },
+        { id: 'D5', name: 'Nordic Dawn', wood: '#D9C9A8', wall: '#F6F3ED', accent: '#A8B49A',
+          d: { wood: 'Light oak cladding', wall: 'Frosty white walls', accent: 'Sage stool seats' } },
+        { id: 'D6', name: 'Cloud & Ash', wood: '#C9C6C0', wall: '#F3F3F2', accent: '#3A3A38',
+          d: { wood: 'Grey-washed ash', wall: 'Snow white walls', accent: 'Charcoal stools' } },
+        { id: 'D7', name: 'Forest & Cream', wood: '#C9BD9C', wall: '#F5F4EC', accent: '#4E6B58',
+          d: { wood: 'Raffia-tone laminate', wall: 'Cream walls', accent: 'Forest green stools' } },
+        { id: 'D8', name: 'Terra Soft', wood: '#E7D5BE', wall: '#F8F4EF', accent: '#CE8A6B',
+          d: { wood: 'Pale beech laminate', wall: 'Ivory walls', accent: 'Terracotta stools' } },
+        { id: 'D9', name: 'Slate Minimal', wood: '#D8C7A5', wall: '#F4F4F1', accent: '#6E7F8D',
+          d: { wood: 'Natural oak', wall: 'Warm white walls', accent: 'Slate blue stools' } },
+        { id: 'D10', name: 'Lilac Haze', wood: '#EDE8EF', wall: '#F7F5F8', accent: '#B8A9C4',
+          d: { wood: 'Lilac-white laminate', wall: 'Lilac-tinted walls', accent: 'Soft lilac stools' } }
+      ]
+    },
+    kids: {
+      name: 'Kids Bedroom',
+      plan: [
+        { x: 61, y: 120, w: 46, h: 300, key: 'wardrobe', label: '' },
+        { x: 380, y: 51, w: 220, h: 28, key: 'seat', label: '' },
+        { x: 380, y: 79, w: 220, h: 260, color: '#DCC9AE', label: 'Bed' },
+        { x: 844, y: 120, w: 46, h: 170, key: 'study', label: '' },
+        { x: 844, y: 330, w: 46, h: 150, key: 'seat', label: '' }
+      ],
+      w3d: { back: 'flute', left: 'wardrobe', right: '#F6F4EF', furn: { type: 'bed', front: 'seat', top: '#DCC9AE' },
+        decor: {
+          back: [
+            { l: 0, t: 0, w: 100, h: 100, kind: 'flute', key: 'flute' },
+            { l: 10, t: 8, w: 64, h: 92, key: 'bedWall', r: '0 90px 0 0' },
+            { l: 30, t: 12, w: 0.2, h: 46, color: 'rgba(0,0,0,0.12)' },
+            { l: 50, t: 12, w: 0.2, h: 46, color: 'rgba(0,0,0,0.12)' },
+            { l: 24, t: 58, w: 38, h: 18, key: 'seat', r: '12px 12px 0 0' },
+            { l: 26.5, t: 64, w: 8, h: 9, color: '#F7F4EE', r: '8px' },
+            { l: 51, t: 64, w: 8, h: 9, color: '#F7F4EE', r: '8px' },
+            { l: 36, t: 65, w: 7, h: 8, key: 'flute', r: '8px' },
+            { l: 43.4, t: 66, w: 6.4, h: 7, color: '#D98E6E', r: '8px' },
+            { l: 66, t: 42, w: 2.2, h: 4, color: '#FFF7E6', r: '50%', extra: 'box-shadow:0 0 13px rgba(255,240,200,0.9);' }
+          ],
+          left: [
+            { l: 33, t: 0, w: 0.3, h: 100, color: 'rgba(0,0,0,0.12)' },
+            { l: 66, t: 0, w: 0.3, h: 100, color: 'rgba(0,0,0,0.12)' },
+            { l: 10, t: 0, w: 24, h: 42, key: 'flute', r: '0 0 60px 60px', op: 0.85 }
+          ],
+          right: [
+            { l: 6, t: 6, w: 34, h: 20, key: 'wardrobe' },
+            { l: 6, t: 30, w: 34, h: 38, kind: 'flute', key: 'study' },
+            { l: 6, t: 33, w: 34, h: 2, color: '#FFFFFF', extra: 'box-shadow:0 4px 10px rgba(255,248,225,0.6);' },
+            { l: 6, t: 56, w: 34, h: 5, color: '#FFFFFF', extra: 'box-shadow:0 2px 4px rgba(0,0,0,0.10);' },
+            { l: 50, t: 8, w: 42, h: 48, kind: 'window' },
+            { l: 50, t: 56, w: 42, h: 6, color: '#9FB4C4' },
+            { l: 50, t: 70, w: 42, h: 6, key: 'seat', r: '6px' },
+            { l: 50, t: 76, w: 42, h: 18, key: 'wardrobe' }
+          ]
+        } },
+      roles: [
+        { key: 'flute', label: 'Fluted arch band' },
+        { key: 'bedWall', label: 'Bed wall panels' },
+        { key: 'wardrobe', label: 'Wardrobe' },
+        { key: 'study', label: 'Study niche' },
+        { key: 'seat', label: 'Bed + seat fabric' }
+      ],
+      palettes: [
+        { id: 'B1', name: 'Original · Sage Arch', flute: '#9DB598', bedWall: '#EFEBE3', wardrobe: '#F2EEE6', study: '#9DB598', seat: '#8A6F5E',
+          d: { flute: 'Sage fluted panel, backlit arch', bedWall: 'Warm white grooved panels', wardrobe: 'Off-white sliding doors, sage U motif', study: 'Sage flutes behind desk', seat: 'Mocha bed + window seat' } },
+        { id: 'B2', name: 'Sky Study', flute: '#9BB8CC', bedWall: '#F3F1EC', wardrobe: '#F7F5F0', study: '#9BB8CC', seat: '#6E7F8D',
+          d: { flute: 'Sky blue flutes', bedWall: 'Soft white panels', wardrobe: 'Crisp white doors', study: 'Sky flutes', seat: 'Slate blue fabric' } },
+        { id: 'B3', name: 'Sunny Ochre', flute: '#E4C575', bedWall: '#F6F2E8', wardrobe: '#F4EFE3', study: '#E4C575', seat: '#B08968',
+          d: { flute: 'Ochre flutes', bedWall: 'Cream panels', wardrobe: 'Bone white doors', study: 'Ochre flutes', seat: 'Camel fabric' } },
+        { id: 'B4', name: 'Coral Pop', flute: '#E8A48F', bedWall: '#F8F4EE', wardrobe: '#FBF7F1', study: '#E8A48F', seat: '#8A6F72',
+          d: { flute: 'Coral flutes', bedWall: 'Warm white panels', wardrobe: 'Ivory doors', study: 'Coral flutes', seat: 'Rosewood fabric' } },
+        { id: 'B5', name: 'Butter & Bone', flute: '#F0DFA4', bedWall: '#FAF7EF', wardrobe: '#F4EFE3', study: '#F0DFA4', seat: '#B08968',
+          d: { flute: 'Butter yellow flutes', bedWall: 'Bone white panels', wardrobe: 'Bone matte doors', study: 'Butter flutes', seat: 'Camel fabric' } },
+        { id: 'B6', name: 'Lilac Haze', flute: '#B8A9C4', bedWall: '#F7F5F8', wardrobe: '#F2EEF3', study: '#B8A9C4', seat: '#8A7E96',
+          d: { flute: 'Soft lilac flutes', bedWall: 'Lilac-white panels', wardrobe: 'Lilac off-white doors', study: 'Lilac flutes', seat: 'Heather fabric' } },
+        { id: 'B7', name: 'Denim Day', flute: '#5C7290', bedWall: '#FBFBF9', wardrobe: '#F4F5F4', study: '#5C7290', seat: '#48596F',
+          d: { flute: 'Denim blue flutes', bedWall: 'Crisp white panels', wardrobe: 'Crisp white doors', study: 'Denim flutes', seat: 'Navy fabric' } },
+        { id: 'B8', name: 'Terra Soft', flute: '#CE8A6B', bedWall: '#FBF8F3', wardrobe: '#F8F4EF', study: '#E7D5BE', seat: '#B0755B',
+          d: { flute: 'Terracotta flutes', bedWall: 'Ivory panels', wardrobe: 'Ivory matte doors', study: 'Pale beech flutes', seat: 'Clay fabric' } },
+        { id: 'B9', name: 'Forest & Cream', flute: '#4E6B58', bedWall: '#F8F5EA', wardrobe: '#F5F4EC', study: '#C9BD9C', seat: '#4E6B58',
+          d: { flute: 'Forest green flutes', bedWall: 'Cream panels', wardrobe: 'Cream matte doors', study: 'Raffia flutes', seat: 'Forest fabric' } },
+        { id: 'B10', name: 'Morning Mist', flute: '#8FB5B0', bedWall: '#F2F4F4', wardrobe: '#E8EAEA', study: '#8FB5B0', seat: '#6E8D89',
+          d: { flute: 'Dusty aqua flutes', bedWall: 'Mist white panels', wardrobe: 'Mist grey doors', study: 'Aqua flutes', seat: 'Eucalyptus fabric' } }
+      ]
+    },
+    master: {
+      name: 'Master Bedroom',
+      plan: [
+        { x: 380, y: 51, w: 240, h: 30, key: 'bedhead', label: '' },
+        { x: 380, y: 81, w: 240, h: 280, key: 'bedding', label: 'Bed' },
+        { x: 844, y: 100, w: 46, h: 340, key: 'wardrobe', label: '' },
+        { x: 61, y: 150, w: 42, h: 150, key: 'wardrobe', label: '' },
+        { x: 330, y: 51, w: 44, h: 52, color: '#F1ECE2', label: '' },
+        { x: 626, y: 51, w: 44, h: 52, color: '#F1ECE2', label: '' }
+      ],
+      w3d: { back: 'wall', left: 'wardrobe', right: '#F5F2EE', furn: { type: 'bed', front: 'bedhead', top: 'bedding' },
+        decor: {
+          back: [
+            { l: 30, t: 12, w: 28, h: 60, kind: 'floral', key: 'headboard', r: '60px 60px 0 0' },
+            { l: 62, t: 26, w: 7, h: 44, kind: 'floral', key: 'headboard', r: '999px' },
+            { l: 13, t: 22, w: 8, h: 48, kind: 'mirror', r: '999px' },
+            { l: 33, t: 58, w: 22, h: 18, key: 'bedhead', r: '14px 14px 0 0' },
+            { l: 34.5, t: 64, w: 5, h: 8.4, color: '#F7F4EE', r: '8px' },
+            { l: 48.5, t: 64, w: 5, h: 8.4, color: '#F7F4EE', r: '8px' },
+            { l: 40, t: 65, w: 4.6, h: 7.4, color: '#5F7A5A', r: '8px' },
+            { l: 44.4, t: 66, w: 4.4, h: 6.6, color: '#D98E6E', r: '8px' }
+          ],
+          left: [
+            { l: 33, t: 0, w: 0.3, h: 100, color: 'rgba(0,0,0,0.08)' },
+            { l: 66, t: 0, w: 0.3, h: 100, color: 'rgba(0,0,0,0.08)' },
+            { l: 0, t: 20, w: 100, h: 0.5, color: 'rgba(0,0,0,0.08)' },
+            { l: 0, t: 58, w: 100, h: 6, kind: 'flute', key: 'band' },
+            { l: 30, t: 48, w: 0.8, h: 26, color: '#2E2C29', r: '3px' },
+            { l: 63, t: 48, w: 0.8, h: 26, color: '#2E2C29', r: '3px' }
+          ],
+          right: [
+            { l: 18, t: 16, w: 11, h: 50, kind: 'mirror', r: '999px', extra: 'box-shadow:0 0 0 3px #FFF6E8,0 0 18px rgba(255,240,210,0.8);' },
+            { l: 12, t: 66, w: 23, h: 5, color: '#F5F1EA', r: '4px' },
+            { l: 52, t: 6, w: 38, h: 88, kind: 'flute', key: '#EAE2D2' }
+          ]
+        } },
+      roles: [
+        { key: 'wall', label: 'Feature wall' },
+        { key: 'headboard', label: 'Floral arch panel' },
+        { key: 'wardrobe', label: 'Wardrobe shutters' },
+        { key: 'band', label: 'Fluted handle band' },
+        { key: 'bedding', label: 'Bedding tone' }
+      ],
+      palettes: [
+        { id: 'M1', name: 'Original · Rose Chinoiserie', wall: '#C9B2B6', headboard: '#EAE0CE', wardrobe: '#EFEAE2', band: '#C39BA4', bedding: '#D9C6A8', bedhead: '#9A7A72',
+          d: { wall: 'Dusty rose gloss panel', headboard: 'Cream floral chinoiserie, backlit arch', wardrobe: 'Ivory shaker shutters', band: 'Rose fluted handle band', bedding: 'Beige linen' } },
+        { id: 'M2', name: 'Sage Calm', wall: '#AEBBAC', headboard: '#F0EADA', wardrobe: '#F2EEE6', band: '#7E8464', bedding: '#D9C6A8', bedhead: '#8A6F5E',
+          d: { wall: 'Sage panel', headboard: 'Ivory floral panel', wardrobe: 'Warm white shutters', band: 'Olive fluted band', bedding: 'Beige linen' } },
+        { id: 'M3', name: 'Slate Serene', wall: '#8FA3B5', headboard: '#EDE9DE', wardrobe: '#F5F3EE', band: '#5C7290', bedding: '#CDB897', bedhead: '#5E6A78',
+          d: { wall: 'Slate blue panel', headboard: 'Bone floral panel', wardrobe: 'Soft white shutters', band: 'Denim fluted band', bedding: 'Sand linen' } },
+        { id: 'M4', name: 'Ivory Walnut', wall: '#E4DACB', headboard: '#F2ECDE', wardrobe: '#F6F2EA', band: '#8A6844', bedding: '#C9B294', bedhead: '#7E6A58',
+          d: { wall: 'Ivory grasscloth tone', headboard: 'Cream floral panel', wardrobe: 'Warm white shutters', band: 'Walnut fluted band', bedding: 'Camel linen' } },
+        { id: 'M5', name: 'Nordic Dawn', wall: '#A8B49A', headboard: '#F0EADA', wardrobe: '#F2EEE6', band: '#D9C9A8', bedding: '#D9C9A8', bedhead: '#7E8464',
+          d: { wall: 'Sage green panel', headboard: 'Ivory floral panel', wardrobe: 'Off-white shutters', band: 'Light oak fluted band', bedding: 'Oat linen' } },
+        { id: 'M6', name: 'Terra Soft', wall: '#E7D5BE', headboard: '#F2ECDE', wardrobe: '#FBF8F3', band: '#CE8A6B', bedding: '#D9C6A8', bedhead: '#B0755B',
+          d: { wall: 'Pale beech panel', headboard: 'Cream floral panel', wardrobe: 'Ivory shutters', band: 'Terracotta fluted band', bedding: 'Beige linen' } },
+        { id: 'M7', name: 'Lilac Haze', wall: '#B8A9C4', headboard: '#F0ECF2', wardrobe: '#F2EEF3', band: '#8A7E96', bedding: '#D8D2DE', bedhead: '#6F6580',
+          d: { wall: 'Soft lilac panel', headboard: 'Lilac-white floral panel', wardrobe: 'Lilac off-white shutters', band: 'Heather fluted band', bedding: 'Lavender-grey linen' } },
+        { id: 'M8', name: 'Forest & Cream', wall: '#4E6B58', headboard: '#F0EADA', wardrobe: '#F8F5EA', band: '#C9BD9C', bedding: '#CDB897', bedhead: '#3E5546',
+          d: { wall: 'Forest green panel', headboard: 'Ivory floral panel', wardrobe: 'Cream shutters', band: 'Raffia fluted band', bedding: 'Sand linen' } },
+        { id: 'M9', name: 'Denim Day', wall: '#5C7290', headboard: '#EDE9DE', wardrobe: '#FBFBF9', band: '#48596F', bedding: '#D8CDB8', bedhead: '#48596F',
+          d: { wall: 'Denim blue panel', headboard: 'Bone floral panel', wardrobe: 'Crisp white shutters', band: 'Navy fluted band', bedding: 'Greige linen' } },
+        { id: 'M10', name: 'Blush Calm', wall: '#DBAA9A', headboard: '#F5EDE6', wardrobe: '#F7EDE7', band: '#B08968', bedding: '#E2CDBB', bedhead: '#9A7A72',
+          d: { wall: 'Dusty rose panel', headboard: 'Blush-white floral panel', wardrobe: 'Blush off-white shutters', band: 'Light walnut fluted band', bedding: 'Blush-beige linen' } }
+      ]
+    }
+  };
+
+  renderVals() {
+    const roomId = this.state.room;
+    const room = this.rooms[roomId];
+    const selId = this.state.selByRoom[roomId] || room.palettes[0].id;
+    const base = room.palettes.find(p => p.id === selId) || room.palettes[0];
+    const ov = (this.state.ovByRoom[roomId]) || {};
+    const sel = Object.assign({}, base, ov);
+    if (roomId === 'master' && !ov.bedhead) sel.bedhead = base.bedhead;
+
+    const chipBase = 'display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;font-family:Archivo,Helvetica,sans-serif;font-size:12.5px;font-weight:600;cursor:pointer;transition:all 0.15s;';
+    const chips = room.palettes.map(p => ({
+      name: p.name,
+      d1: p[room.roles[0].key], d2: p[room.roles[1].key], d3: p[room.roles[room.roles.length - 1].key],
+      pick: () => this.setState(st => ({
+        selByRoom: Object.assign({}, st.selByRoom, { [roomId]: p.id }),
+        ovByRoom: Object.assign({}, st.ovByRoom, { [roomId]: {} })
+      })),
+      style: chipBase + (p.id === selId
+        ? 'background:#23211E;color:#FFFFFF;border:1px solid #23211E;'
+        : 'background:#FFFFFF;color:#23211E;border:1px solid #E4E0D8;')
+    }));
+
+    const tabBase = 'padding:8px 16px;border-radius:8px;font-family:Archivo,Helvetica,sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;';
+    const roomBtns = Object.keys(this.rooms).map(id => ({
+      name: this.rooms[id].name,
+      pick: () => this.setState({ room: id }),
+      style: tabBase + (id === roomId
+        ? 'background:#23211E;color:#FFFFFF;border:1px solid #23211E;'
+        : 'background:#FFFFFF;color:#23211E;border:1px solid #E4E0D8;')
+    }));
+
+    const mixer = room.roles.map(r => ({
+      label: r.label,
+      swatches: room.palettes
+        .map(p => ({ color: p[r.key], from: p.name }))
+        .filter((s, i, arr) => arr.findIndex(x => x.color.toLowerCase() === s.color.toLowerCase()) === i)
+        .map(s => ({
+          title: s.from,
+          pick: () => this.setState(st => {
+            const cur = st.ovByRoom[roomId] || {};
+            return { ovByRoom: Object.assign({}, st.ovByRoom, { [roomId]: Object.assign({}, cur, { [r.key]: s.color }) }) };
+          }),
+          style: 'width:22px;height:22px;border-radius:6px;cursor:pointer;padding:0;background:' + s.color + ';border:2px solid ' +
+            (String(sel[r.key]).toLowerCase() === s.color.toLowerCase() ? '#23211E' : 'rgba(0,0,0,0.12)') + ';'
+        }))
+    }));
+
+    const legend = room.roles.map(r => ({
+      label: r.label,
+      color: sel[r.key],
+      desc: ov[r.key] ? 'Custom pick' : (base.d[r.key] || '')
+    }));
+
+    const resetMix = () => this.setState(st => ({ ovByRoom: Object.assign({}, st.ovByRoom, { [roomId]: {} }) }));
+
+    const view = this.state.view;
+    const vBase = 'padding:8px 16px;border-radius:8px;font-family:Archivo,Helvetica,sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;';
+    const viewBtns = this.views.map(v => ({
+      name: v.name,
+      pick: () => this.setState({ view: v.id }),
+      style: vBase + (v.id === view
+        ? 'background:#23211E;color:#FFFFFF;border:1px solid #23211E;'
+        : 'background:#FFFFFF;color:#23211E;border:1px solid #E4E0D8;')
+    }));
+
+    const cv = k => (k && k[0] === '#') ? k : (sel[k] || '#EEE');
+    const planBlocks = (room.plan || []).map(b => ({
+      label: b.label || '',
+      style: 'position:absolute;left:' + b.x + 'px;top:' + b.y + 'px;width:' + b.w + 'px;height:' + b.h + 'px;border-radius:' + (b.r || 5) + 'px;background:' + (b.key ? cv(b.key) : b.color) + ';transition:background 0.4s;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:rgba(0,0,0,0.5);text-transform:uppercase;letter-spacing:0.06em;box-shadow:0 1px 3px rgba(0,0,0,0.14)'
+    }));
+
+    const cfg = room.w3d;
+    const wallBase = 'position:absolute;left:-450px;top:-250px;width:900px;height:500px;overflow:hidden;transition:background 0.4s;';
+    const orbitInner = 'position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;transform:translateZ(180px) rotateX(' + this.state.pitch + 'deg) rotateY(' + this.state.yaw + 'deg)';
+    const w3dBack = wallBase + 'transform:translateZ(-450px);background:' + cv(cfg.back) + ';';
+    const w3dLeft = wallBase + 'transform:rotateY(90deg) translateZ(-450px);background:linear-gradient(rgba(0,0,0,0.05),rgba(0,0,0,0.02)),' + cv(cfg.left) + ';';
+    const w3dRight = wallBase + 'transform:rotateY(-90deg) translateZ(-450px);background:linear-gradient(rgba(0,0,0,0.05),rgba(0,0,0,0.02)),' + cv(cfg.right) + ';';
+    const w3dFloor = 'position:absolute;left:-450px;top:-450px;width:900px;height:900px;transform:rotateX(90deg) translateZ(-250px);background:linear-gradient(135deg,#F1EFEA,#E8E5DE)';
+    const w3dCeil = 'position:absolute;left:-450px;top:-450px;width:900px;height:900px;transform:rotateX(-90deg) translateZ(-250px);background:#FBFAF6';
+    const dd = cfg.decor || {};
+    const backDecor = this._dec(dd.back, cv);
+    const leftDecor = this._dec(dd.left, cv);
+    const rightDecor = this._dec(dd.right, cv);
+    const angles = [
+      { name: 'Center', yaw: 0, pitch: 5 },
+      { name: 'Left corner', yaw: 34, pitch: 8 },
+      { name: 'Right corner', yaw: -34, pitch: 8 },
+      { name: 'From above', yaw: -14, pitch: 26 }
+    ];
+    const angleBtns = angles.map(a => ({
+      name: a.name,
+      pick: () => this.setState({ yaw: a.yaw, pitch: a.pitch }),
+      style: 'padding:5px 12px;border-radius:999px;font-family:Archivo,Helvetica,sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;transition:all 0.15s;' +
+        (Math.abs(this.state.yaw - a.yaw) < 2 && Math.abs(this.state.pitch - a.pitch) < 2
+          ? 'background:#23211E;color:#FFFFFF;border:1px solid #23211E;'
+          : 'background:rgba(255,255,255,0.92);color:#23211E;border:1px solid #E4E0D8;')
+    }));
+    const ft = cfg.furn ? (cfg.furn.type || 'bed') : null;
+    let f3dTop = 'display:none', f3dFront = 'display:none';
+    if (ft === 'bed') {
+      f3dTop = 'position:absolute;left:-150px;top:-190px;width:300px;height:380px;transform:translate3d(0,140px,-250px) rotateX(90deg);background:linear-gradient(#FDFCF9 0%,#FDFCF9 18%,' + cv(cfg.furn.top) + ' 18%,' + cv(cfg.furn.top) + ' 100%);border-radius:4px;transition:background 0.4s';
+      f3dFront = 'position:absolute;left:-150px;top:-55px;width:300px;height:110px;transform:translate3d(0,195px,-60px);background:' + cv(cfg.furn.front) + ';border-radius:0 0 6px 6px;transition:background 0.4s';
+    } else if (ft === 'sofa') {
+      f3dTop = 'position:absolute;left:-150px;top:-75px;width:300px;height:150px;transform:translate3d(0,145px,-375px) rotateX(90deg);background:' + cv(cfg.furn.top) + ';filter:brightness(0.95);border-radius:6px;transition:background 0.4s';
+      f3dFront = 'position:absolute;left:-150px;top:-52px;width:300px;height:105px;transform:translate3d(0,197px,-300px);background:' + cv(cfg.furn.front) + ';border-radius:0 0 6px 6px;transition:background 0.4s';
+    } else if (ft === 'table') {
+      f3dTop = 'position:absolute;left:-120px;top:-70px;width:240px;height:140px;transform:translate3d(0,130px,-250px) rotateX(90deg);background:' + cv(cfg.furn.top) + ';border-radius:12px;box-shadow:0 0 0 2px rgba(0,0,0,0.05);transition:background 0.4s';
+      f3dFront = 'position:absolute;left:-50px;top:-60px;width:100px;height:120px;transform:translate3d(0,190px,-249px);background:' + cv(cfg.furn.front) + ';border-radius:0 0 10px 10px;transition:background 0.4s';
+    }
+
+    const front = view === 'front';
+    return {
+      roomName: room.name, sel, chips, roomBtns, mixer, legend, resetMix, viewBtns,
+      isLiving: roomId === 'living' && front, isKitchen: roomId === 'kitchen' && front, isMandir: roomId === 'mandir' && front,
+      isKids: roomId === 'kids' && front, isMaster: roomId === 'master' && front,
+      isTop: view === 'top', is3D: view === '3d',
+      planBlocks, orbitInner, w3dBack, w3dLeft, w3dRight, w3dFloor, w3dCeil, backDecor, leftDecor, rightDecor, angleBtns, f3dTop, f3dFront,
+      orbitDown: this.orbitDown, orbitMove: this.orbitMove, orbitUp: this.orbitUp,
+      stageWrapRef: this.stageWrapRef, stageScale: this.state.stageScale,
+      stageWrapH: Math.round(560 * this.state.stageScale)
+    };
+  }
+}
+
+</script>
+</body>
+</html>

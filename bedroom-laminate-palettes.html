@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #F4F2EE; font-family: 'Archivo', Helvetica, sans-serif; color: #23211E; }
+  a { color: #23211E; } a:hover { color: #6B675F; }
+</style>
+</helmet>
+
+<section style="padding: 48px; display: flex; flex-direction: column; gap: 28px">
+  <div style="max-width: 720px; display: flex; flex-direction: column; gap: 8px">
+    <div style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A857B; font-weight: 600">Bedroom · 15 m² · Turn 1</div>
+    <h1 style="margin: 0; font-size: 34px; font-weight: 700; letter-spacing: -0.02em">10 laminate palettes — bright, fresh, minimal</h1>
+    <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #6B675F">Each card maps laminates to the five surfaces: closet, bed-back wall panel, study table, loft cabinet, and the base wall tone. All palettes assume matte laminates with one textured or soft-gloss accent. Schematic shows the bed wall elevation.</p>
+    <p style="margin: 0; font-size: 13px"><a href="/room-visualizer">← Back to 3D room visualizer</a></p>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 24px">
+
+    <!-- 1a Nordic Dawn -->
+    <div id="1a" style="width: 360px; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; height: 150px; background: #F6F3ED">
+        <div style="position: absolute; top: 12px; left: 130px; right: 16px; height: 26px; background: #D9C9A8"></div>
+        <div style="position: absolute; top: 12px; bottom: 14px; left: 16px; width: 100px; background: #F1EDE4; border: 1px solid #E0DACC"></div>
+        <div style="position: absolute; top: 48px; bottom: 14px; left: 130px; width: 130px; background: #D9C9A8"></div>
+        <div style="position: absolute; bottom: 14px; left: 146px; width: 98px; height: 40px; background: #FFFFFF; border: 1px solid #E0DACC"></div>
+        <div style="position: absolute; bottom: 14px; right: 16px; width: 66px; height: 34px; background: #A8B49A"></div>
+        <a href="#1a" style="position: absolute; top: 10px; left: 16px; transform: translateY(-2px); text-decoration: none"><span style="display: inline-block; background: #23211E; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px">1a</span></a>
+      </div>
+      <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 18px; font-weight: 700">Nordic Dawn</div>
+        <div style="display: flex; gap: 6px">
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #F1EDE4; border: 1px solid #E0DACC"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #D9C9A8"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #A8B49A"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FFFFFF; border: 1px solid #E0DACC"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; font-size: 13px; line-height: 1.45">
+          <div style="color: #8A857B">Closet</div><div>Frosty white matte, handle-less</div>
+          <div style="color: #8A857B">Bed wall + loft</div><div>Light oak woodgrain laminate</div>
+          <div style="color: #8A857B">Study table</div><div>Pure white with oak edge band</div>
+          <div style="color: #8A857B">Accent</div><div>Sage green on one loft shutter</div>
+        </div>
+        <div style="font-size: 12px; color: #8A857B; line-height: 1.5">The safest bright-minimal combo: oak warmth keeps white from feeling clinical; sage adds freshness without noise.</div>
+      </div>
+    </div>
+
+    <!-- 1b Cloud & Ash -->
+    <div id="1b" style="width: 360px; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; height: 150px; background: #F3F3F2">
+        <div style="position: absolute; top: 12px; left: 130px; right: 16px; height: 26px; background: #C9C6C0"></div>
+        <div style="position: absolute; top: 12px; bottom: 14px; left: 16px; width: 100px; background: #FAFAF8; border: 1px solid #E3E2DE"></div>
+        <div style="position: absolute; top: 48px; bottom: 14px; left: 130px; width: 130px; background: #C9C6C0"></div>
+        <div style="position: absolute; bottom: 14px; left: 146px; width: 98px; height: 40px; background: #FFFFFF; border: 1px solid #E3E2DE"></div>
+        <div style="position: absolute; bottom: 14px; right: 16px; width: 66px; height: 34px; background: #3A3A38"></div>
+        <a href="#1b" style="position: absolute; top: 10px; left: 16px; transform: translateY(-2px); text-decoration: none"><span style="display: inline-block; background: #23211E; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px">1b</span></a>
+      </div>
+      <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 18px; font-weight: 700">Cloud &amp; Ash</div>
+        <div style="display: flex; gap: 6px">
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FAFAF8; border: 1px solid #E3E2DE"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #C9C6C0"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #3A3A38"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FFFFFF; border: 1px solid #E3E2DE"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; font-size: 13px; line-height: 1.45">
+          <div style="color: #8A857B">Closet</div><div>Snow white super-matte</div>
+          <div style="color: #8A857B">Bed wall + loft</div><div>Grey-washed ash woodgrain</div>
+          <div style="color: #8A857B">Study table</div><div>White top, ash legs/gable</div>
+          <div style="color: #8A857B">Accent</div><div>Charcoal matte study-table drawer face</div>
+        </div>
+        <div style="font-size: 12px; color: #8A857B; line-height: 1.5">Cool, gallery-like calm. Best if your light is warm (south/west windows) — the greys stay crisp, never cold.</div>
+      </div>
+    </div>
+
+    <!-- 1c Fresh Linen -->
+    <div id="1c" style="width: 360px; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; height: 150px; background: #F7F5F0">
+        <div style="position: absolute; top: 12px; left: 130px; right: 16px; height: 26px; background: #EFE9DD"></div>
+        <div style="position: absolute; top: 12px; bottom: 14px; left: 16px; width: 100px; background: #EFE9DD; border: 1px solid #E2DACA"></div>
+        <div style="position: absolute; top: 48px; bottom: 14px; left: 130px; width: 130px; background: #B9CFDD"></div>
+        <div style="position: absolute; bottom: 14px; left: 146px; width: 98px; height: 40px; background: #FFFFFF; border: 1px solid #E2DACA"></div>
+        <div style="position: absolute; bottom: 14px; right: 16px; width: 66px; height: 34px; background: #E4D6B8"></div>
+        <a href="#1c" style="position: absolute; top: 10px; left: 16px; transform: translateY(-2px); text-decoration: none"><span style="display: inline-block; background: #23211E; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px">1c</span></a>
+      </div>
+      <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 18px; font-weight: 700">Fresh Linen</div>
+        <div style="display: flex; gap: 6px">
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #EFE9DD"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #B9CFDD"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #E4D6B8"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FFFFFF; border: 1px solid #E2DACA"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; font-size: 13px; line-height: 1.45">
+          <div style="color: #8A857B">Closet + loft</div><div>Linen-textured off-white laminate</div>
+          <div style="color: #8A857B">Bed wall</div><div>Powder blue matte panel</div>
+          <div style="color: #8A857B">Study table</div><div>Warm white, pale-sand edge</div>
+          <div style="color: #8A857B">Accent</div><div>Pale sand on desk-side shelf</div>
+        </div>
+        <div style="font-size: 12px; color: #8A857B; line-height: 1.5">Airy and breezy — the blue bed wall is the single statement; everything else recedes into textured whites.</div>
+      </div>
+    </div>
+
+    <!-- 1d Terra Soft -->
+    <div id="1d" style="width: 360px; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; height: 150px; background: #F8F4EF">
+        <div style="position: absolute; top: 12px; left: 130px; right: 16px; height: 26px; background: #E7D5BE"></div>
+        <div style="position: absolute; top: 12px; bottom: 14px; left: 16px; width: 100px; background: #FBF8F3; border: 1px solid #EADFCE"></div>
+        <div style="position: absolute; top: 48px; bottom: 14px; left: 130px; width: 130px; background: #CE8A6B"></div>
+        <div style="position: absolute; bottom: 14px; left: 146px; width: 98px; height: 40px; background: #FFFFFF; border: 1px solid #EADFCE"></div>
+        <div style="position: absolute; bottom: 14px; right: 16px; width: 66px; height: 34px; background: #E7D5BE"></div>
+        <a href="#1d" style="position: absolute; top: 10px; left: 16px; transform: translateY(-2px); text-decoration: none"><span style="display: inline-block; background: #23211E; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px">1d</span></a>
+      </div>
+      <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 18px; font-weight: 700">Terra Soft</div>
+        <div style="display: flex; gap: 6px">
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FBF8F3; border: 1px solid #EADFCE"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #CE8A6B"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #E7D5BE"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FFFFFF; border: 1px solid #EADFCE"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; font-size: 13px; line-height: 1.45">
+          <div style="color: #8A857B">Closet</div><div>Ivory matte, slim groove handles</div>
+          <div style="color: #8A857B">Bed wall</div><div>Muted terracotta fluted panel</div>
+          <div style="color: #8A857B">Study + loft</div><div>Pale beech woodgrain</div>
+          <div style="color: #8A857B">Accent</div><div>Terracotta repeats on one loft door</div>
+        </div>
+        <div style="font-size: 12px; color: #8A857B; line-height: 1.5">Warm and lively — terracotta gives the “happening” energy while ivory + beech keep it 80% minimal.</div>
+      </div>
+    </div>
+
+    <!-- 1e Olive Grove -->
+    <div id="1e" style="width: 360px; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; height: 150px; background: #F6F4EC">
+        <div style="position: absolute; top: 12px; left: 130px; right: 16px; height: 26px; background: #D8B98A"></div>
+        <div style="position: absolute; top: 12px; bottom: 14px; left: 16px; width: 100px; background: #7E8464"></div>
+        <div style="position: absolute; top: 48px; bottom: 14px; left: 130px; width: 130px; background: #FBF9F2; border: 1px solid #E6E1D2"></div>
+        <div style="position: absolute; bottom: 14px; left: 146px; width: 98px; height: 40px; background: #FFFFFF; border: 1px solid #E6E1D2"></div>
+        <div style="position: absolute; bottom: 14px; right: 16px; width: 66px; height: 34px; background: #D8B98A"></div>
+        <a href="#1e" style="position: absolute; top: 10px; left: 16px; transform: translateY(-2px); text-decoration: none"><span style="display: inline-block; background: #23211E; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px">1e</span></a>
+      </div>
+      <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 18px; font-weight: 700">Olive Grove</div>
+        <div style="display: flex; gap: 6px">
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FBF9F2; border: 1px solid #E6E1D2"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #7E8464"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #D8B98A"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FFFFFF; border: 1px solid #E6E1D2"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; font-size: 13px; line-height: 1.45">
+          <div style="color: #8A857B">Closet</div><div>Deep olive matte — the hero surface</div>
+          <div style="color: #8A857B">Bed wall</div><div>Warm white slatted panel</div>
+          <div style="color: #8A857B">Study + loft</div><div>Honey oak woodgrain</div>
+          <div style="color: #8A857B">Accent</div><div>Brass-tone handles (hardware, not laminate)</div>
+        </div>
+        <div style="font-size: 12px; color: #8A857B; line-height: 1.5">Flips the formula: the closet carries the color, the bed wall stays quiet. Grounded, botanical, still bright.</div>
+      </div>
+    </div>
+
+    <!-- 1f Morning Mist -->
+    <div id="1f" style="width: 360px; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; height: 150px; background: #F2F4F4">
+        <div style="position: absolute; top: 12px; left: 130px; right: 16px; height: 26px; background: #E8EAEA"></div>
+        <div style="position: absolute; top: 12px; bottom: 14px; left: 16px; width: 100px; background: #E8EAEA; border: 1px solid #D9DCDC"></div>
+        <div style="position: absolute; top: 48px; bottom: 14px; left: 130px; width: 130px; background: #8FB5B0"></div>
+        <div style="position: absolute; bottom: 14px; left: 146px; width: 98px; height: 40px; background: #FFFFFF; border: 1px solid #D9DCDC"></div>
+        <div style="position: absolute; bottom: 14px; right: 16px; width: 66px; height: 34px; background: #E0D2B4"></div>
+        <a href="#1f" style="position: absolute; top: 10px; left: 16px; transform: translateY(-2px); text-decoration: none"><span style="display: inline-block; background: #23211E; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px">1f</span></a>
+      </div>
+      <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 18px; font-weight: 700">Morning Mist</div>
+        <div style="display: flex; gap: 6px">
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #E8EAEA"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #8FB5B0"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #E0D2B4"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FFFFFF; border: 1px solid #D9DCDC"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; font-size: 13px; line-height: 1.45">
+          <div style="color: #8A857B">Closet + loft</div><div>Mist grey super-matte</div>
+          <div style="color: #8A857B">Bed wall</div><div>Dusty aqua panel behind headboard</div>
+          <div style="color: #8A857B">Study table</div><div>White top with pale-oak apron</div>
+          <div style="color: #8A857B">Accent</div><div>Pale oak open niche in closet run</div>
+        </div>
+        <div style="font-size: 12px; color: #8A857B; line-height: 1.5">Spa-like and serene. Aqua reads fresh without being loud; greys do the minimalist work.</div>
+      </div>
+    </div>
+
+    <!-- 1g Butter & Bone -->
+    <div id="1g" style="width: 360px; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; height: 150px; background: #FAF7EF">
+        <div style="position: absolute; top: 12px; left: 130px; right: 16px; height: 26px; background: #F0DFA4"></div>
+        <div style="position: absolute; top: 12px; bottom: 14px; left: 16px; width: 100px; background: #F4EFE3; border: 1px solid #E7DFCB"></div>
+        <div style="position: absolute; top: 48px; bottom: 14px; left: 130px; width: 130px; background: #E3D3AC"></div>
+        <div style="position: absolute; bottom: 14px; left: 146px; width: 98px; height: 40px; background: #FFFFFF; border: 1px solid #E7DFCB"></div>
+        <div style="position: absolute; bottom: 14px; right: 16px; width: 66px; height: 34px; background: #F0DFA4"></div>
+        <a href="#1g" style="position: absolute; top: 10px; left: 16px; transform: translateY(-2px); text-decoration: none"><span style="display: inline-block; background: #23211E; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px">1g</span></a>
+      </div>
+      <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 18px; font-weight: 700">Butter &amp; Bone</div>
+        <div style="display: flex; gap: 6px">
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #F4EFE3"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #F0DFA4"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #E3D3AC"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FFFFFF; border: 1px solid #E7DFCB"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; font-size: 13px; line-height: 1.45">
+          <div style="color: #8A857B">Closet</div><div>Bone white matte</div>
+          <div style="color: #8A857B">Bed wall</div><div>Pale sand woodgrain</div>
+          <div style="color: #8A857B">Study table</div><div>White with butter-yellow drawer faces</div>
+          <div style="color: #8A857B">Loft</div><div>Butter yellow soft-gloss</div>
+        </div>
+        <div style="font-size: 12px; color: #8A857B; line-height: 1.5">Sunniest of the ten — yellow lives up high on the loft so it lifts the room without dominating eye level.</div>
+      </div>
+    </div>
+
+    <!-- 1h Slate Minimal -->
+    <div id="1h" style="width: 360px; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; height: 150px; background: #F4F4F1">
+        <div style="position: absolute; top: 12px; left: 130px; right: 16px; height: 26px; background: #FBFAF7"></div>
+        <div style="position: absolute; top: 12px; bottom: 14px; left: 16px; width: 100px; background: #FBFAF7; border: 1px solid #E4E3DE"></div>
+        <div style="position: absolute; top: 48px; bottom: 14px; left: 130px; width: 130px; background: #6E7F8D"></div>
+        <div style="position: absolute; bottom: 14px; left: 146px; width: 98px; height: 40px; background: #D8C7A5"></div>
+        <div style="position: absolute; bottom: 14px; right: 16px; width: 66px; height: 34px; background: #D8C7A5"></div>
+        <a href="#1h" style="position: absolute; top: 10px; left: 16px; transform: translateY(-2px); text-decoration: none"><span style="display: inline-block; background: #23211E; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px">1h</span></a>
+      </div>
+      <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 18px; font-weight: 700">Slate Minimal</div>
+        <div style="display: flex; gap: 6px">
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FBFAF7; border: 1px solid #E4E3DE"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #6E7F8D"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #D8C7A5"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FFFFFF; border: 1px solid #E4E3DE"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; font-size: 13px; line-height: 1.45">
+          <div style="color: #8A857B">Closet + loft</div><div>Warm white matte, continuous grain</div>
+          <div style="color: #8A857B">Bed wall</div><div>Slate blue matte panel</div>
+          <div style="color: #8A857B">Study table</div><div>Natural oak top + white body</div>
+          <div style="color: #8A857B">Accent</div><div>Oak floating shelf on slate wall</div>
+        </div>
+        <div style="font-size: 12px; color: #8A857B; line-height: 1.5">The most “adult” option — deep but not dark, slate anchors sleep while whites keep daytime brightness.</div>
+      </div>
+    </div>
+
+    <!-- 1i Blush Calm -->
+    <div id="1i" style="width: 360px; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; height: 150px; background: #F9F4F1">
+        <div style="position: absolute; top: 12px; left: 130px; right: 16px; height: 26px; background: #F7EDE7"></div>
+        <div style="position: absolute; top: 12px; bottom: 14px; left: 16px; width: 100px; background: #F7EDE7; border: 1px solid #EBDCD2"></div>
+        <div style="position: absolute; top: 48px; bottom: 14px; left: 130px; width: 130px; background: #DBAA9A"></div>
+        <div style="position: absolute; bottom: 14px; left: 146px; width: 98px; height: 40px; background: #FFFFFF; border: 1px solid #EBDCD2"></div>
+        <div style="position: absolute; bottom: 14px; right: 16px; width: 66px; height: 34px; background: #B08968"></div>
+        <a href="#1i" style="position: absolute; top: 10px; left: 16px; transform: translateY(-2px); text-decoration: none"><span style="display: inline-block; background: #23211E; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px">1i</span></a>
+      </div>
+      <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 18px; font-weight: 700">Blush Calm</div>
+        <div style="display: flex; gap: 6px">
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #F7EDE7"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #DBAA9A"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #B08968"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FFFFFF; border: 1px solid #EBDCD2"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; font-size: 13px; line-height: 1.45">
+          <div style="color: #8A857B">Closet + loft</div><div>Blush-tinted off-white matte</div>
+          <div style="color: #8A857B">Bed wall</div><div>Dusty rose fluted panel</div>
+          <div style="color: #8A857B">Study table</div><div>Warm white + light walnut top</div>
+          <div style="color: #8A857B">Accent</div><div>Light walnut vertical strip beside closet</div>
+        </div>
+        <div style="font-size: 12px; color: #8A857B; line-height: 1.5">Soft-romantic minimalism — rose tones are muted enough to feel warm rather than sweet.</div>
+      </div>
+    </div>
+
+    <!-- 1j Monochrome Warm -->
+    <div id="1j" style="width: 360px; background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; height: 150px; background: #F3F1EC">
+        <div style="position: absolute; top: 12px; left: 130px; right: 16px; height: 26px; background: #DCD6C9"></div>
+        <div style="position: absolute; top: 12px; bottom: 14px; left: 16px; width: 100px; background: #DCD6C9"></div>
+        <div style="position: absolute; top: 48px; bottom: 14px; left: 130px; width: 130px; background: #FBF9F5; border: 1px solid #E5E1D7"></div>
+        <div style="position: absolute; bottom: 14px; left: 146px; width: 98px; height: 40px; background: #FFFFFF; border: 1px solid #E5E1D7"></div>
+        <div style="position: absolute; bottom: 14px; right: 16px; width: 66px; height: 34px; background: #2E2C29"></div>
+        <a href="#1j" style="position: absolute; top: 10px; left: 16px; transform: translateY(-2px); text-decoration: none"><span style="display: inline-block; background: #23211E; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px">1j</span></a>
+      </div>
+      <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 18px; font-weight: 700">Monochrome Warm</div>
+        <div style="display: flex; gap: 6px">
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FBF9F5; border: 1px solid #E5E1D7"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #DCD6C9"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #2E2C29"></div>
+          <div style="flex: 1; height: 34px; border-radius: 5px; background: #FFFFFF; border: 1px solid #E5E1D7"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; font-size: 13px; line-height: 1.45">
+          <div style="color: #8A857B">Closet + loft</div><div>Greige matte, one continuous plane</div>
+          <div style="color: #8A857B">Bed wall</div><div>Warm white micro-groove panel</div>
+          <div style="color: #8A857B">Study table</div><div>White with black matte legs/edge</div>
+          <div style="color: #8A857B">Accent</div><div>Black matte details only — handles, desk edge</div>
+        </div>
+        <div style="font-size: 12px; color: #8A857B; line-height: 1.5">Strictest minimalism of the set. No color — contrast and texture carry the interest. Ages best.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="max-width: 720px; font-size: 13px; color: #8A857B; line-height: 1.6">Schematic key: left block = closet · wide center = bed-back wall panel (bed in front) · top strip = loft cabinet · right block = study table. Reference options by their badge (e.g. 1a) in chat.</div>
+</section>
+
+</x-dc>
+</body>
+</html>
